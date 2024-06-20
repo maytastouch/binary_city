@@ -126,9 +126,8 @@ class _ListTilesState extends State<ListTiles> {
                 ),
                 leading: Icon(
                   widget.icon,
-                  color: isDark
-                      ? AppColors.whiteModeColor
-                      : AppColors.primaryColor,
+                  color:
+                      isDark ? AppColors.whiteModeColor : AppColors.blackColor,
                 ),
                 onTap: () {
                   widget.onPressed!();

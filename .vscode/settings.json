@@ -4,6 +4,7 @@
         "fpdart",
         "gridview",
         "mocktail",
+        "prefs",
         "supabase",
         "swiper"
     ]
