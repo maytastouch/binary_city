@@ -14,6 +14,7 @@ class ClientForm extends StatefulWidget {
 }
 
 class _ClientFormState extends State<ClientForm> {
+  bool _isPressed1 = false;
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
@@ -62,6 +63,7 @@ class _ClientFormState extends State<ClientForm> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 height: 60,
+                width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.only(
@@ -71,46 +73,69 @@ class _ClientFormState extends State<ClientForm> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: Container(
-                        height: 57,
-                        decoration: const BoxDecoration(
-                          color: AppColors.whiteModeColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isPressed1 = !_isPressed1;
+                        });
+                      },
+                      child: Expanded(
+                        child: Container(
+                          height: 57,
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          decoration: BoxDecoration(
+                            color: !_isPressed1
+                                ? AppColors.primaryColor
+                                : AppColors.whiteModeColor,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: TextWidget(
-                            text: 'General',
-                            color: color,
-                            textSize: AppConstants.mainFont4,
-                            hoverColor: color,
+                          child: Center(
+                            child: TextWidget(
+                              text: 'General',
+                              color: color,
+                              textSize: AppConstants.mainFont4,
+                              hoverColor: color,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        height: 57,
-                        decoration: const BoxDecoration(
-                          color: AppColors.whiteModeColor,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(8),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isPressed1 = !_isPressed1;
+                        });
+                      },
+                      child: Expanded(
+                        child: Container(
+                          height: 57,
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          decoration: BoxDecoration(
+                            color: _isPressed1
+                                ? AppColors.primaryColor
+                                : AppColors.whiteModeColor,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(8),
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: TextWidget(
-                            text: 'Contacts',
-                            color: color,
-                            textSize: AppConstants.mainFont4,
-                            hoverColor: color,
+                          child: Center(
+                            child: TextWidget(
+                              text: 'Contacts',
+                              color: color,
+                              textSize: AppConstants.mainFont4,
+                              hoverColor: color,
+                            ),
                           ),
                         ),
                       ),
                     )
                   ],
                 ),
+              ),
+              const Column(
+                children: [],
               )
             ],
           )
