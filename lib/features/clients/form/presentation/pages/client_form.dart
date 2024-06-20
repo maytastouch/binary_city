@@ -1,9 +1,10 @@
 import 'package:binary_city/core/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:tab_container/tab_container.dart';
 
+import '../../../../../core/common/widgets/text_widget.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/constants.dart';
-import '../../../../../core/widgets/text_widget.dart';
 import '../widgets/save_client_button.dart';
 
 class ClientForm extends StatefulWidget {
@@ -14,7 +15,6 @@ class ClientForm extends StatefulWidget {
 }
 
 class _ClientFormState extends State<ClientForm> {
-  bool _isPressed1 = false;
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
@@ -58,87 +58,44 @@ class _ClientFormState extends State<ClientForm> {
           ),
           const SizedBox(height: 20),
           //table
-          Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                height: 60,
-                width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _isPressed1 = !_isPressed1;
-                        });
-                      },
-                      child: Expanded(
-                        child: Container(
-                          height: 57,
-                          width: MediaQuery.of(context).size.width / 2.5,
-                          decoration: BoxDecoration(
-                            color: !_isPressed1
-                                ? AppColors.primaryColor
-                                : AppColors.whiteModeColor,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                            ),
-                          ),
-                          child: Center(
-                            child: TextWidget(
-                              text: 'General',
-                              color: color,
-                              textSize: AppConstants.mainFont4,
-                              hoverColor: color,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _isPressed1 = !_isPressed1;
-                        });
-                      },
-                      child: Expanded(
-                        child: Container(
-                          height: 57,
-                          width: MediaQuery.of(context).size.width / 2.5,
-                          decoration: BoxDecoration(
-                            color: _isPressed1
-                                ? AppColors.primaryColor
-                                : AppColors.whiteModeColor,
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(8),
-                            ),
-                          ),
-                          child: Center(
-                            child: TextWidget(
-                              text: 'Contacts',
-                              color: color,
-                              textSize: AppConstants.mainFont4,
-                              hoverColor: color,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const Column(
-                children: [],
-              )
+          TabContainer(
+            //controller: _tabController,
+            //tabEdge: TabEdge.right,
+            tabsStart: 0,
+            tabsEnd: 0.9,
+            tabMaxLength: 100,
+            borderRadius: BorderRadius.circular(10),
+            tabBorderRadius: BorderRadius.circular(10),
+            childPadding: const EdgeInsets.all(20.0),
+            selectedTextStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 15.0,
+            ),
+            unselectedTextStyle: const TextStyle(
+              color: Colors.black,
+              fontSize: 13.0,
+            ),
+            colors: const [
+              AppColors.primaryColor,
+              AppColors.primaryColor,
             ],
-          )
+            tabs: const [
+              Text('General'),
+              Text('Contacts'),
+            ],
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                child: const Text('Child 1'),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                child: const Text('Child 2'),
+              ),
+            ],
+          ),
         ],
       ),
     );

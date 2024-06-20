@@ -1,9 +1,9 @@
 import 'package:binary_city/core/constants/constants.dart';
-import 'package:binary_city/core/widgets/text_widget.dart';
 import 'package:binary_city/features/clients/form/presentation/pages/client_form.dart';
 import 'package:binary_city/features/clients/view/presentation/widgets/add_client_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/common/widgets/text_widget.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/utils/utils.dart';
 import 'client_table.dart';
