@@ -1,4 +1,5 @@
 import 'package:binary_city/core/utils/utils.dart';
+import 'package:binary_city/features/clients/form/presentation/widgets/add_client_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_container/tab_container.dart';
 
@@ -15,10 +16,22 @@ class ClientForm extends StatefulWidget {
 }
 
 class _ClientFormState extends State<ClientForm> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController clientCodeController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    clientCodeController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
     Color color = utils.color;
+    bool isDark =
+        Theme.of(context).brightness == Brightness.dark ? true : false;
 
     return Expanded(
       child: Column(
@@ -94,10 +107,32 @@ class _ClientFormState extends State<ClientForm> {
                   hoverColor: color),
             ],
             children: [
-              SizedBox(
+              Container(
                 width: MediaQuery.of(context).size.width,
                 height: 200,
-                child: const Text('Child 1'),
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? AppColors.sideBarDarkModeColor
+                      : AppColors.whiteColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AddClientTextField(
+                      hint: 'Name',
+                      controller: nameController,
+                      label: 'Name',
+                    ),
+                    AddClientTextField(
+                      hint: 'Client Code',
+                      controller: clientCodeController,
+                      label: 'Client Code',
+                      readOnly: true,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
