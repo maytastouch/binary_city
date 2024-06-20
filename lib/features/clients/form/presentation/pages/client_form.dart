@@ -1,4 +1,5 @@
 import 'package:binary_city/core/utils/utils.dart';
+import 'package:binary_city/features/clients/form/presentation/pages/client_form_table.dart';
 import 'package:binary_city/features/clients/form/presentation/widgets/add_client_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_container/tab_container.dart';
@@ -109,7 +110,7 @@ class _ClientFormState extends State<ClientForm> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 200,
+                height: 400,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: isDark
@@ -134,11 +135,22 @@ class _ClientFormState extends State<ClientForm> {
                   ],
                 ),
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 200,
-                child: const Text('Child 2'),
-              ),
+              Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? AppColors.sideBarDarkModeColor
+                        : AppColors.whiteColor,
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  ),
+                  width: MediaQuery.of(context).size.width,
+                  height: 400,
+                  child: ClientFormDataTable(
+                    isChecked: false,
+                    onChanged: (bool? value) {},
+                    color: color,
+                    onPressed: () {},
+                  )),
             ],
           ),
         ],

@@ -131,52 +131,23 @@ class _NavBarState extends State<NavBar> {
           //third Row - Trailing icons
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
+            child: Column(
               children: [
-                //notification icon button
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        IconlyLight.notification,
-                        color: isDark
-                            ? AppColors.whiteModeColor
-                            : AppColors.primaryColor,
-                      ),
-                    ),
-                    TextWidget(
-                      text: 'Notification',
-                      color: colorScheme.onSurface,
-                      textSize: 10,
-                      hoverColor: colorScheme.onSurface,
-                      isTitle: true,
-                    ),
-                  ],
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    IconlyLight.logout,
+                    color: isDark
+                        ? AppColors.whiteModeColor
+                        : AppColors.primaryColor,
+                  ),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                //logout icon button
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        IconlyLight.logout,
-                        color: isDark
-                            ? AppColors.whiteModeColor
-                            : AppColors.primaryColor,
-                      ),
-                    ),
-                    TextWidget(
-                      text: 'Logout',
-                      color: colorScheme.onSurface,
-                      textSize: 10,
-                      hoverColor: colorScheme.onSurface,
-                      isTitle: true,
-                    ),
-                  ],
+                TextWidget(
+                  text: 'Logout',
+                  color: colorScheme.onSurface,
+                  textSize: 10,
+                  hoverColor: colorScheme.onSurface,
+                  isTitle: true,
                 ),
               ],
             ),
