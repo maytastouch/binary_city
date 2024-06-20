@@ -60,10 +60,13 @@ class _NavBarState extends State<NavBar> {
                   right: 3,
                 ),
                 child: isDark
-                    ? Image.asset(
-                        'assets/images/final.png',
-                        width: 100,
-                        height: 60,
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Image.asset(
+                          'assets/images/final.png',
+                          width: 100,
+                          height: 60,
+                        ),
                       )
                     : Image.asset(
                         'assets/images/Screenshot 2024-06-20 at 11.36.21 AM.png',
