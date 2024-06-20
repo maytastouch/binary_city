@@ -22,7 +22,7 @@ class AppConstants {
   static const int dashboardWidth = 1000;
   //font sizes
   static const double mainFont1 = 60.0;
-  static const double mainFont2 = 50.0;
+  static const double mainFont2 = 25.0;
   static const double mainFont3 = 40.0;
   static const double mainFont4 = 16.0;
   static const double mainFont5 = 15.0;
