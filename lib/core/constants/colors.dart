@@ -7,7 +7,6 @@ class AppColors {
   //blue color
   static const blueColor = Colors.blue;
   //red color
-  static const redColor = Color.fromARGB(255, 255, 0, 0);
 
   //orange color
   static const orangeColor = Color.fromARGB(255, 255, 165, 0);
@@ -17,7 +16,7 @@ class AppColors {
   static const backgroundColor = Colors.white;
   static const textColor = Color.fromARGB(255, 0, 0, 0);
   static const primaryColor = Colors.red;
-  static const sideBarColor = Color.fromRGBO(255, 0, 0, 0.5);
+  static var sideBarColor = Colors.red.shade400;
   static const searchBarColor = Color.fromRGBO(50, 55, 57, 1);
   static const borderColor = Colors.grey;
 
