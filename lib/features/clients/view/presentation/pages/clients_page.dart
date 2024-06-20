@@ -21,95 +21,99 @@ class _ClientsPageState extends State<ClientsPage> {
   Widget build(BuildContext context) {
     final utils = Utils(context);
     Color color = utils.color;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //status row
-          Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    _isPressed1 = false;
-                  });
-                },
-                child: TextWidget(
-                  text: 'Home',
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //status row
+            Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _isPressed1 = false;
+                    });
+                  },
+                  child: TextWidget(
+                    text: 'Home',
+                    color: color,
+                    textSize: AppConstants.mainFont9,
+                    hoverColor: AppColors.greyColor,
+                  ),
+                ),
+                TextWidget(
+                  text: ' / ',
                   color: color,
                   textSize: AppConstants.mainFont9,
-                  hoverColor: AppColors.greyColor,
+                  hoverColor: color,
                 ),
-              ),
-              TextWidget(
-                text: ' / ',
-                color: color,
-                textSize: AppConstants.mainFont9,
-                hoverColor: color,
-              ),
-              TextWidget(
-                text: 'Clients',
-                color: AppColors.primaryColor,
-                textSize: AppConstants.mainFont9,
-                hoverColor: AppColors.primaryColor,
-              ),
-              if (_isPressed1)
                 TextWidget(
-                  text: ' / Form',
+                  text: 'Clients',
                   color: AppColors.primaryColor,
                   textSize: AppConstants.mainFont9,
                   hoverColor: AppColors.primaryColor,
                 ),
-            ],
-          ),
-          const SizedBox(
-            height: 3,
-          ),
-
-          //list
-          if (!_isPressed1)
-            Expanded(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextWidget(
-                        text: 'Clients',
-                        color: color,
-                        textSize: AppConstants.mainFont3,
-                        hoverColor: color,
-                      ),
-                      AddClientButton(
-                        button_title: ' + New Client',
-                        radius: 10,
-                        onPressed: () {
-                          setState(() {
-                            _isPressed1 = !_isPressed1;
-                          });
-                        },
-                        child: null,
-                      ),
-                    ],
+                if (_isPressed1)
+                  TextWidget(
+                    text: ' / Form',
+                    color: AppColors.primaryColor,
+                    textSize: AppConstants.mainFont9,
+                    hoverColor: AppColors.primaryColor,
                   ),
-                  //table
-                  Expanded(
-                    child: ClientDataTable(
-                      isChecked: false,
-                      // ignore: avoid_types_as_parameter_names
-                      onChanged: (bool) {},
-                      color: color,
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
+              ],
             ),
-          if (_isPressed1) const ClientForm(),
-        ],
+            const SizedBox(
+              height: 3,
+            ),
+
+            //list
+            if (!_isPressed1)
+              Expanded(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextWidget(
+                          text: 'Clients',
+                          color: color,
+                          textSize: AppConstants.mainFont3,
+                          hoverColor: color,
+                        ),
+                        AddClientButton(
+                          button_title: ' + New Client',
+                          radius: 10,
+                          onPressed: () {
+                            setState(() {
+                              _isPressed1 = !_isPressed1;
+                            });
+                          },
+                          child: null,
+                        ),
+                      ],
+                    ),
+                    //table
+                    Expanded(
+                      child: ClientDataTable(
+                        isChecked: false,
+                        // ignore: avoid_types_as_parameter_names
+                        onChanged: (bool) {},
+                        color: color,
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            if (_isPressed1) const ClientForm(),
+          ],
+        ),
       ),
     );
   }

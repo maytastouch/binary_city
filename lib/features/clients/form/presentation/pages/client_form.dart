@@ -34,83 +34,107 @@ class _ClientFormState extends State<ClientForm> {
     bool isDark =
         Theme.of(context).brightness == Brightness.dark ? true : false;
 
-    return Expanded(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextWidget(
-                text: 'Client Form',
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextWidget(
+              text: 'Client Form',
+              color: color,
+              textSize: AppConstants.mainFont3,
+              hoverColor: color,
+            ),
+            Row(
+              children: [
+                SaveClientButton(
+                  button_title: ' + Link Contact',
+                  radius: 10,
+                  onPressed: () {
+                    setState(() {});
+                  },
+                  child: null,
+                  isRed: true,
+                ),
+                const SizedBox(width: 10),
+                SaveClientButton(
+                  button_title: ' + Save Client',
+                  radius: 10,
+                  onPressed: () {
+                    setState(() {});
+                  },
+                  child: null,
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        //table
+        TabContainer(
+          //controller: _tabController,
+          //tabEdge: TabEdge.right,
+          tabsStart: 0,
+          tabsEnd: 0.9,
+          tabMaxLength: 100,
+          borderRadius: BorderRadius.circular(10),
+          tabBorderRadius: BorderRadius.circular(10),
+          childPadding: const EdgeInsets.all(20.0),
+          selectedTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: 15.0,
+          ),
+          unselectedTextStyle: const TextStyle(
+            color: Colors.black,
+            fontSize: 13.0,
+          ),
+          colors: const [
+            AppColors.primaryColor,
+            AppColors.primaryColor,
+          ],
+          tabs: [
+            //Text('General'),
+            //Text('Contacts'),
+            TextWidget(
+                text: 'General',
                 color: color,
-                textSize: AppConstants.mainFont3,
-                hoverColor: color,
+                textSize: AppConstants.mainFont5,
+                hoverColor: color),
+            TextWidget(
+                text: 'Contacts',
+                color: color,
+                textSize: AppConstants.mainFont5,
+                hoverColor: color),
+          ],
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 400,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: isDark
+                    ? AppColors.sideBarDarkModeColor
+                    : AppColors.whiteColor,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
-              Row(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SaveClientButton(
-                    button_title: ' + Link Contact',
-                    radius: 10,
-                    onPressed: () {
-                      setState(() {});
-                    },
-                    child: null,
-                    isRed: true,
+                  AddClientTextField(
+                    hint: 'Name',
+                    controller: nameController,
+                    label: 'Name',
                   ),
-                  const SizedBox(width: 10),
-                  SaveClientButton(
-                    button_title: ' + Save Client',
-                    radius: 10,
-                    onPressed: () {
-                      setState(() {});
-                    },
-                    child: null,
+                  AddClientTextField(
+                    hint: 'Client Code',
+                    controller: clientCodeController,
+                    label: 'Client Code',
+                    readOnly: true,
                   ),
                 ],
               ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          //table
-          TabContainer(
-            //controller: _tabController,
-            //tabEdge: TabEdge.right,
-            tabsStart: 0,
-            tabsEnd: 0.9,
-            tabMaxLength: 100,
-            borderRadius: BorderRadius.circular(10),
-            tabBorderRadius: BorderRadius.circular(10),
-            childPadding: const EdgeInsets.all(20.0),
-            selectedTextStyle: const TextStyle(
-              color: Colors.white,
-              fontSize: 15.0,
             ),
-            unselectedTextStyle: const TextStyle(
-              color: Colors.black,
-              fontSize: 13.0,
-            ),
-            colors: const [
-              AppColors.primaryColor,
-              AppColors.primaryColor,
-            ],
-            tabs: [
-              //Text('General'),
-              //Text('Contacts'),
-              TextWidget(
-                  text: 'General',
-                  color: color,
-                  textSize: AppConstants.mainFont5,
-                  hoverColor: color),
-              TextWidget(
-                  text: 'Contacts',
-                  color: color,
-                  textSize: AppConstants.mainFont5,
-                  hoverColor: color),
-            ],
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 400,
+            Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: isDark
@@ -118,43 +142,17 @@ class _ClientFormState extends State<ClientForm> {
                       : AppColors.whiteColor,
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AddClientTextField(
-                      hint: 'Name',
-                      controller: nameController,
-                      label: 'Name',
-                    ),
-                    AddClientTextField(
-                      hint: 'Client Code',
-                      controller: clientCodeController,
-                      label: 'Client Code',
-                      readOnly: true,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? AppColors.sideBarDarkModeColor
-                        : AppColors.whiteColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  height: 400,
-                  child: ClientFormDataTable(
-                    isChecked: false,
-                    onChanged: (bool? value) {},
-                    color: color,
-                    onPressed: () {},
-                  )),
-            ],
-          ),
-        ],
-      ),
+                width: MediaQuery.of(context).size.width,
+                height: 400,
+                child: ClientFormDataTable(
+                  isChecked: false,
+                  onChanged: (bool? value) {},
+                  color: color,
+                  onPressed: () {},
+                )),
+          ],
+        ),
+      ],
     );
   }
 }
