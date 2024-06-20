@@ -1,5 +1,6 @@
 import 'package:binary_city/core/constants/constants.dart';
 import 'package:binary_city/core/widgets/text_widget.dart';
+import 'package:binary_city/features/clients/form/presentation/pages/client_form.dart';
 import 'package:binary_city/features/clients/view/presentation/widgets/add_client_button.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,13 @@ class _ClientsPageState extends State<ClientsPage> {
                 textSize: AppConstants.mainFont9,
                 hoverColor: AppColors.primaryColor,
               ),
+              if (_isPressed1)
+                TextWidget(
+                  text: ' / Form',
+                  color: AppColors.primaryColor,
+                  textSize: AppConstants.mainFont9,
+                  hoverColor: AppColors.primaryColor,
+                ),
             ],
           ),
           const SizedBox(
@@ -100,6 +108,7 @@ class _ClientsPageState extends State<ClientsPage> {
                 ],
               ),
             ),
+          if (_isPressed1) const ClientForm(),
         ],
       ),
     );
