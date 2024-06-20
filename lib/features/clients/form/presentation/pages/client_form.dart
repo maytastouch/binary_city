@@ -79,9 +79,19 @@ class _ClientFormState extends State<ClientForm> {
               AppColors.primaryColor,
               AppColors.primaryColor,
             ],
-            tabs: const [
-              Text('General'),
-              Text('Contacts'),
+            tabs: [
+              //Text('General'),
+              //Text('Contacts'),
+              TextWidget(
+                  text: 'General',
+                  color: color,
+                  textSize: AppConstants.mainFont5,
+                  hoverColor: color),
+              TextWidget(
+                  text: 'Contacts',
+                  color: color,
+                  textSize: AppConstants.mainFont5,
+                  hoverColor: color),
             ],
             children: [
               SizedBox(
