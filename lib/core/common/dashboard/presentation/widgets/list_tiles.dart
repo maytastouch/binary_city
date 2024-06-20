@@ -120,7 +120,7 @@ class _ListTilesState extends State<ListTiles> {
                       //fontWeight: FontWeight.w800,
                       color: isDark
                           ? AppColors.whiteModeColor
-                          : AppColors.primaryColor,
+                          : AppColors.blackColor,
                     ),
                   ),
                 ),

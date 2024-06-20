@@ -61,9 +61,9 @@ class _NavBarState extends State<NavBar> {
                 ),
                 child: isDark
                     ? Image.asset(
-                        'assets/images/Screenshot 2024-06-20 at 11.36.21 AM.png',
-                        width: 80,
-                        height: 80,
+                        'assets/images/final.png',
+                        width: 100,
+                        height: 60,
                       )
                     : Image.asset(
                         'assets/images/Screenshot 2024-06-20 at 11.36.21 AM.png',
