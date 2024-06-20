@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/utils/utils.dart';
+import 'client_table.dart';
 
 class ClientsPage extends StatefulWidget {
   const ClientsPage({super.key});
@@ -49,7 +50,7 @@ class _ClientsPageState extends State<ClientsPage> {
             ],
           ),
           const SizedBox(
-            height: 10,
+            height: 3,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +68,16 @@ class _ClientsPageState extends State<ClientsPage> {
                 child: null,
               ),
             ],
-          )
+          ),
+          //table
+          Expanded(
+            child: ClientDataTable(
+              isChecked: false,
+              onChanged: (bool) {},
+              color: color,
+              onPressed: () {},
+            ),
+          ),
         ],
       ),
     );
