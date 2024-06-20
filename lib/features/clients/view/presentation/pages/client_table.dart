@@ -63,13 +63,6 @@ class _ClientDataTableState extends State<ClientDataTable> {
             ),
             size: ColumnSize.S,
           ),
-          DataColumn2(
-            label: Text(
-              'Gender',
-              style: TextStyle(color: AppColors.whiteColor),
-            ),
-            size: ColumnSize.S,
-          ),
           DataColumn(
             label: Text(
               'No. of Linked Contacts',
