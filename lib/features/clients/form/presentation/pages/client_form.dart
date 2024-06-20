@@ -104,7 +104,7 @@ class _ClientFormState extends State<ClientForm> {
                   textSize: AppConstants.mainFont5,
                   hoverColor: color),
               TextWidget(
-                  text: 'Contacts',
+                  text: 'Contact(s)',
                   color: color,
                   textSize: AppConstants.mainFont5,
                   hoverColor: color),
