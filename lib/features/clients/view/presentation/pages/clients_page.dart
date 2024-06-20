@@ -15,6 +15,7 @@ class ClientsPage extends StatefulWidget {
 }
 
 class _ClientsPageState extends State<ClientsPage> {
+  bool _isPressed1 = false;
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
@@ -29,11 +30,18 @@ class _ClientsPageState extends State<ClientsPage> {
           //status row
           Row(
             children: [
-              TextWidget(
-                text: 'Home',
-                color: color,
-                textSize: AppConstants.mainFont9,
-                hoverColor: AppColors.greyColor,
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    _isPressed1 = false;
+                  });
+                },
+                child: TextWidget(
+                  text: 'Home',
+                  color: color,
+                  textSize: AppConstants.mainFont9,
+                  hoverColor: AppColors.greyColor,
+                ),
               ),
               TextWidget(
                 text: ' / ',
@@ -52,32 +60,46 @@ class _ClientsPageState extends State<ClientsPage> {
           const SizedBox(
             height: 3,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextWidget(
-                text: 'Clients',
-                color: AppColors.blackColor,
-                textSize: AppConstants.mainFont2,
-                hoverColor: AppColors.blackColor,
+
+          //list
+          if (!_isPressed1)
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                        text: 'Clients',
+                        color: AppColors.blackColor,
+                        textSize: AppConstants.mainFont2,
+                        hoverColor: AppColors.blackColor,
+                      ),
+                      AddClientButton(
+                        button_title: ' + New Client',
+                        radius: 10,
+                        onPressed: () {
+                          setState(() {
+                            _isPressed1 = !_isPressed1;
+                          });
+                        },
+                        child: null,
+                      ),
+                    ],
+                  ),
+                  //table
+                  Expanded(
+                    child: ClientDataTable(
+                      isChecked: false,
+                      // ignore: avoid_types_as_parameter_names
+                      onChanged: (bool) {},
+                      color: color,
+                      onPressed: () {},
+                    ),
+                  ),
+                ],
               ),
-              AddClientButton(
-                button_title: ' + New Client',
-                radius: 10,
-                onPressed: () {},
-                child: null,
-              ),
-            ],
-          ),
-          //table
-          Expanded(
-            child: ClientDataTable(
-              isChecked: false,
-              onChanged: (bool) {},
-              color: color,
-              onPressed: () {},
             ),
-          ),
         ],
       ),
     );
