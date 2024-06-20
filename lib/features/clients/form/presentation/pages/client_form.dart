@@ -60,8 +60,7 @@ class _ClientFormState extends State<ClientForm> {
           Column(
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 2),
                 height: 60,
                 decoration: const BoxDecoration(
                   color: AppColors.primaryColor,
@@ -72,17 +71,43 @@ class _ClientFormState extends State<ClientForm> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(
-                      text: 'General',
-                      color: color,
-                      textSize: AppConstants.mainFont3,
-                      hoverColor: color,
+                    Expanded(
+                      child: Container(
+                        height: 57,
+                        decoration: const BoxDecoration(
+                          color: AppColors.whiteModeColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                          ),
+                        ),
+                        child: Center(
+                          child: TextWidget(
+                            text: 'General',
+                            color: color,
+                            textSize: AppConstants.mainFont4,
+                            hoverColor: color,
+                          ),
+                        ),
+                      ),
                     ),
-                    TextWidget(
-                      text: 'Contacts',
-                      color: color,
-                      textSize: AppConstants.mainFont3,
-                      hoverColor: color,
+                    Expanded(
+                      child: Container(
+                        height: 57,
+                        decoration: const BoxDecoration(
+                          color: AppColors.whiteModeColor,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(8),
+                          ),
+                        ),
+                        child: Center(
+                          child: TextWidget(
+                            text: 'Contacts',
+                            color: color,
+                            textSize: AppConstants.mainFont4,
+                            hoverColor: color,
+                          ),
+                        ),
+                      ),
                     )
                   ],
                 ),
