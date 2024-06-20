@@ -27,20 +27,57 @@ class _ClientFormState extends State<ClientForm> {
               TextWidget(
                 text: 'Client Form',
                 color: color,
-                textSize: AppConstants.mainFont2,
+                textSize: AppConstants.mainFont3,
                 hoverColor: color,
               ),
-              SaveClientButton(
-                button_title: ' + Save Client',
-                radius: 10,
-                onPressed: () {
-                  setState(() {});
-                },
-                child: null,
+              Row(
+                children: [
+                  SaveClientButton(
+                    button_title: ' + Link Contact',
+                    radius: 10,
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: null,
+                    isRed: true,
+                  ),
+                  const SizedBox(width: 10),
+                  SaveClientButton(
+                    button_title: ' + Save Client',
+                    radius: 10,
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: null,
+                  ),
+                ],
               ),
             ],
           ),
           //table
+          Column(
+            children: [
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextWidget(
+                      text: 'General',
+                      color: color,
+                      textSize: AppConstants.mainFont3,
+                      hoverColor: color,
+                    ),
+                    TextWidget(
+                      text: 'Contacts',
+                      color: color,
+                      textSize: AppConstants.mainFont3,
+                      hoverColor: color,
+                    )
+                  ],
+                ),
+              )
+            ],
+          )
         ],
       ),
     );

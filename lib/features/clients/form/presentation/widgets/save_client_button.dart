@@ -3,19 +3,20 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/constants/colors.dart';
 
 class SaveClientButton extends StatelessWidget {
-  // ignore: non_constant_identifier_names
   final String button_title;
   final double radius;
   final Widget? child;
   final Function() onPressed;
-  // ignore: non_constant_identifier_names
+  final bool isRed;
+
   const SaveClientButton({
     super.key,
     // ignore: non_constant_identifier_names
     required this.button_title,
     required this.radius,
-    required this.onPressed,
     required this.child,
+    required this.onPressed,
+    this.isRed = false,
   });
 
   @override
@@ -26,6 +27,7 @@ class SaveClientButton extends StatelessWidget {
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         side: const BorderSide(color: AppColors.primaryColor),
+        backgroundColor: isRed ? Colors.red : null, // Add this line
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -42,7 +44,9 @@ class SaveClientButton extends StatelessWidget {
               style: TextStyle(
                   color: isDark
                       ? AppColors.whiteModeColor
-                      : AppColors.primaryColor),
+                      : isRed
+                          ? AppColors.whiteColor
+                          : AppColors.primaryColor),
             ),
           ],
         ),

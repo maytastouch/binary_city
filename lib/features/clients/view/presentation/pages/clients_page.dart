@@ -80,7 +80,7 @@ class _ClientsPageState extends State<ClientsPage> {
                       TextWidget(
                         text: 'Clients',
                         color: color,
-                        textSize: AppConstants.mainFont2,
+                        textSize: AppConstants.mainFont3,
                         hoverColor: color,
                       ),
                       AddClientButton(
