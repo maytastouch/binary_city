@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theme/bloc/theme_bloc.dart';
-import '../../../../core/widgets/white_button.dart';
+import '../../../../core/common/widgets/white_button.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

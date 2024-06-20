@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../../../core/widgets/text_widget.dart';
+import '../../../../core/common/widgets/text_widget.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/constants.dart';
 
