@@ -71,9 +71,9 @@ class _ClientsPageState extends State<ClientsPage> {
                     children: [
                       TextWidget(
                         text: 'Clients',
-                        color: AppColors.blackColor,
+                        color: color,
                         textSize: AppConstants.mainFont2,
-                        hoverColor: AppColors.blackColor,
+                        hoverColor: color,
                       ),
                       AddClientButton(
                         button_title: ' + New Client',
