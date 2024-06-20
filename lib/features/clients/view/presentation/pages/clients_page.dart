@@ -1,10 +1,10 @@
 import 'package:binary_city/core/constants/constants.dart';
 import 'package:binary_city/core/widgets/text_widget.dart';
-import 'package:binary_city/features/clients/presentation/widgets/add_client_button.dart';
+import 'package:binary_city/features/clients/view/presentation/widgets/add_client_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/colors.dart';
-import '../../../../core/utils/utils.dart';
+import '../../../../../core/constants/colors.dart';
+import '../../../../../core/utils/utils.dart';
 import 'client_table.dart';
 
 class ClientsPage extends StatefulWidget {
