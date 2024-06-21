@@ -1,7 +1,8 @@
 import 'package:binary_city/core/constants/constants.dart';
-import 'package:binary_city/features/clients/form/presentation/pages/client_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/common/dashboard/presentation/bloc/selected_index.dart';
 import '../../../../../core/common/widgets/text_widget.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/utils/utils.dart';
@@ -37,9 +38,8 @@ class _ContactsPageState extends State<ContactsPage> {
               children: [
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      _isPressed1 = false;
-                    });
+                    final bloc = BlocProvider.of<SelectedIndexBloc>(context);
+                    bloc.add(SelectIndex(0));
                   },
                   child: TextWidget(
                     text: 'Home',
@@ -54,11 +54,18 @@ class _ContactsPageState extends State<ContactsPage> {
                   textSize: AppConstants.mainFont9,
                   hoverColor: color,
                 ),
-                TextWidget(
-                  text: 'Contacts',
-                  color: AppColors.primaryColor,
-                  textSize: AppConstants.mainFont9,
-                  hoverColor: AppColors.primaryColor,
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _isPressed1 = false;
+                    });
+                  },
+                  child: TextWidget(
+                    text: 'Contacts',
+                    color: AppColors.primaryColor,
+                    textSize: AppConstants.mainFont9,
+                    hoverColor: AppColors.primaryColor,
+                  ),
                 ),
                 if (_isPressed1)
                   TextWidget(
