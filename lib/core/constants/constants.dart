@@ -1,7 +1,8 @@
 class AppConstants {
   //supabase table names
-  static const String allUsersTable = 'profiles';
-  static const String allStudentsTable = 'students';
+  static const String clientStable = 'clients';
+  static const String contactsTable = 'contacts';
+  static const String linkTable = 'client_contact_links';
 
   //window sizes
   static const maxWidth = 1920.0;
