@@ -31,18 +31,21 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
       // Generate a unique numeric code
       int numericCode = 1;
       String clientCode;
+      bool isUnique = false;
       do {
         clientCode = clientCodeAlpha + numericCode.toString().padLeft(3, '0');
         final response = await supabaseClient
             .from(AppConstants.clientStable)
             .select('client_code')
             .eq('client_code', clientCode)
-            .single();
-        if (response['data'] == null) {
-          break;
+            .maybeSingle();
+
+        if (response == null || response['error'] != null) {
+          isUnique = true;
+        } else {
+          numericCode++;
         }
-        numericCode++;
-      } while (true);
+      } while (!isUnique);
 
       await supabaseClient
           .from(AppConstants.clientStable)

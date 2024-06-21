@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:io' show Platform;
 import 'package:binary_city/core/theme/bloc/theme_state.dart';
 import 'package:binary_city/features/clients/form/presentation/bloc/add_client_bloc.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:binary_city/core/common/dashboard/presentation/pages/dashboard.dart';
 import 'package:flutter/foundation.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return MaterialApp(
+          builder: BotToastInit(),
           debugShowCheckedModeBanner: false,
           title: 'Binary City',
           theme: state.themeData,
