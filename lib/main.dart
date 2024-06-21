@@ -13,6 +13,7 @@ import 'package:window_size/window_size.dart';
 import 'core/common/dashboard/presentation/bloc/selected_index.dart';
 import 'core/constants/constants.dart';
 import 'core/theme/bloc/theme_bloc.dart';
+import 'features/clients/view/presentation/bloc/client_view_bloc.dart';
 import 'init_dependencies.dart';
 
 void main() async {
@@ -42,14 +43,28 @@ void main() async {
         BlocProvider(
           create: (_) => serviceLocator<AddClientBloc>(),
         ),
+        BlocProvider(
+          create: (_) => serviceLocator<ClientViewBloc>(),
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    context.read<ClientViewBloc>().add(GetClientsEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

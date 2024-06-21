@@ -8,6 +8,7 @@ Future<void> initDependencies() async {
     anonKey: AppSecrets.supabase_service_role,
   );
   _addClientBloc();
+  _clientViewBloc();
 
   serviceLocator.registerLazySingleton(() => supabase.client);
 }
@@ -38,6 +39,36 @@ void _addClientBloc() {
   serviceLocator.registerLazySingleton(
     () => AddClientBloc(
       addClientUseCase: serviceLocator(),
+    ),
+  );
+}
+
+_clientViewBloc() {
+  //datasource
+  serviceLocator.registerFactory<ClientViewRemoteDataSource>(
+    () => ClientViewRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  //repository
+  serviceLocator.registerFactory<ClientViewRepository>(
+    () => ClientViewRepositoryImpl(
+      serviceLocator(),
+    ),
+  );
+
+  //usecase
+  serviceLocator.registerFactory<GetClientsUseCase>(
+    () => GetClientsUseCase(
+      serviceLocator(),
+    ),
+  );
+
+  //bloc
+  serviceLocator.registerLazySingleton(
+    () => ClientViewBloc(
+      getClientUseCase: serviceLocator(),
     ),
   );
 }
