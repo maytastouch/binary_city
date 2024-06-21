@@ -163,7 +163,7 @@ class _ClientFormState extends State<ClientForm> {
                           enableValidation: true,
                         ),
                         AddClientTextField(
-                          hint: 'Client Code',
+                          hint: '',
                           controller: clientCodeController,
                           label: 'Client Code',
                           readOnly: true,
