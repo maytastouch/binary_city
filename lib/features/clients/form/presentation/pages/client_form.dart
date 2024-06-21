@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tab_container/tab_container.dart';
 
+import '../../../../../core/common/widgets/loader.dart';
 import '../../../../../core/common/widgets/text_widget.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/constants.dart';
@@ -23,6 +24,8 @@ class _ClientFormState extends State<ClientForm> {
   final formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController clientCodeController = TextEditingController();
+
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -46,6 +49,14 @@ class _ClientFormState extends State<ClientForm> {
 
         if (state is AddClientSuccess) {
           showBotToast(state.message);
+          setState(() {
+            _isLoading = false;
+          });
+        }
+        if (state is AddClientLoading) {
+          setState(() {
+            _isLoading = true;
+          });
         }
       },
       builder: (context, state) {
@@ -82,7 +93,7 @@ class _ClientFormState extends State<ClientForm> {
                               .add(AddClientsEvent(name: nameController.text));
                         }
                       },
-                      child: null,
+                      child: _isLoading ? const Loader() : null,
                     ),
                   ],
                 ),
