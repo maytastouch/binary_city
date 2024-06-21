@@ -1,0 +1,7 @@
+class AppSecrets {
+  static const supabaseUrl = 'https://xmpemhumerxpvoitpaui.supabase.co';
+  static const supabaseAnonKey =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtcGVtaHVtZXJ4cHZvaXRwYXVpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg5NTUzMzgsImV4cCI6MjAzNDUzMTMzOH0.XDdv4FyVGq0qo8XslZ975GRfUSaB4lb-hQwenS9OFpA';
+  static const supabase_service_role =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtcGVtaHVtZXJ4cHZvaXRwYXVpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODk1NTMzOCwiZXhwIjoyMDM0NTMxMzM4fQ.xJHuE3cEsCzzQ53Py8cTqTTs5Dx2YwK5VsS39fztddg';
+}

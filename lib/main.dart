@@ -11,9 +11,12 @@ import 'package:window_size/window_size.dart';
 import 'core/common/dashboard/presentation/bloc/selected_index.dart';
 import 'core/constants/constants.dart';
 import 'core/theme/bloc/theme_bloc.dart';
+import 'init_dependencies.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initDependencies();
 
   if (!kIsWeb) {
     if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
