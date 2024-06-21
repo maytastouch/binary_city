@@ -9,8 +9,12 @@ final class AddClientLoading extends AddClientState {}
 
 final class AddClientSuccess extends AddClientState {
   final String message;
+  final String code;
 
-  AddClientSuccess({required this.message});
+  AddClientSuccess({
+    required this.message,
+    required this.code,
+  });
 }
 
 final class AddClientFailure extends AddClientState {

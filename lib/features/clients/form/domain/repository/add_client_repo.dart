@@ -4,7 +4,7 @@ import '../../../../../core/error/failures.dart';
 
 abstract interface class AddClientRepository {
   // add client to database
-  Future<Either<Failure, void>> addClient({
+  Future<Either<Failure, String>> addClient({
     required String name,
   });
 }

@@ -55,6 +55,7 @@ class _ClientFormState extends State<ClientForm> {
           setState(() {
             _isLoading = false;
           });
+          clientCodeController = TextEditingController(text: state.code);
         }
         if (state is AddClientLoading) {
           setState(() {

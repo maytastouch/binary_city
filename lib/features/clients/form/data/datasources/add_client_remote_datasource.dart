@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AddClientRemoteDataSource {
   // Add client to database
-  Future<void> addClient({
+  Future<String> addClient({
     required String name,
   });
 }
@@ -14,7 +14,7 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
 
   AddClientRemoteDatasourceImpl(this.supabaseClient);
   @override
-  Future<void> addClient({required String name}) async {
+  Future<String> addClient({required String name}) async {
     try {
       // Extract the first three characters and convert to uppercase
       String clientCodeAlpha = name.length >= 3
@@ -71,6 +71,7 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
           .insert({'name': name, 'client_code': clientCode});
 
       // Optionally, return or log the clientCode if needed
+      return clientCode;
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
     } catch (e) {

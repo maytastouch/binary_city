@@ -22,7 +22,8 @@ class AddClientBloc extends Bloc<AddClientEvent, AddClientState> {
     final result = await _addClientUseCase(AddClientParams(name: event.name));
     result.fold(
       (failure) => emit(AddClientFailure(message: failure.message)),
-      (_) => emit(AddClientSuccess(message: 'Client added successfully')),
+      (res) => emit(
+          AddClientSuccess(message: 'Client added successfully', code: res)),
     );
   }
 }

@@ -12,10 +12,10 @@ class AddClientRepositoryImpl implements AddClientRepository {
 
   AddClientRepositoryImpl(this.addClientRemoteDataSource);
   @override
-  Future<Either<Failure, void>> addClient({required String name}) async {
+  Future<Either<Failure, String>> addClient({required String name}) async {
     try {
-      await addClientRemoteDataSource.addClient(name: name);
-      return const Right(null);
+      final res = await addClientRemoteDataSource.addClient(name: name);
+      return  Right(res);
     } on ServerException catch (e) {
       return Left(Failure(e.message));
     }
