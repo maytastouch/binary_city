@@ -72,7 +72,7 @@ class _ContactDataTableState extends State<ContactDataTable> {
           ),
           DataColumn(
             label: Text(
-              'No. of Linked Contacts',
+              'No. of Linked Clients',
               style: TextStyle(color: AppColors.whiteColor),
             ),
           ),
