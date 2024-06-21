@@ -112,7 +112,7 @@ class _ClientFormState extends State<ClientForm> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 400,
+                height: 300,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: isDark
@@ -148,7 +148,7 @@ class _ClientFormState extends State<ClientForm> {
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   width: MediaQuery.of(context).size.width,
-                  height: 400,
+                  height: 300,
                   child: ClientFormDataTable(
                     isChecked: false,
                     onChanged: (bool? value) {},
