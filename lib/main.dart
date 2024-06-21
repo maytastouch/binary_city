@@ -46,16 +46,16 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Binary City',
-            theme: state.themeData,
-            home: const DashBoard());
+          debugShowCheckedModeBanner: false,
+          title: 'Binary City',
+          theme: state.themeData,
+          home: const DashBoard(),
+        );
       },
     );
   }
