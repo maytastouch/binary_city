@@ -71,7 +71,6 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
           .insert({'name': name, 'client_code': clientCode});
 
       // Optionally, return or log the clientCode if needed
-      print('Client code generated: $clientCode');
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
     } catch (e) {

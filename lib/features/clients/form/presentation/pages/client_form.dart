@@ -45,6 +45,9 @@ class _ClientFormState extends State<ClientForm> {
       listener: (context, state) {
         if (state is AddClientFailure) {
           showBotToast(state.message);
+          setState(() {
+            _isLoading = false;
+          });
         }
 
         if (state is AddClientSuccess) {

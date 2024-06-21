@@ -1,3 +1,4 @@
+import 'package:binary_city/core/error/exceptions.dart';
 import 'package:binary_city/core/error/failures.dart';
 
 // ignore: implementation_imports
@@ -15,8 +16,8 @@ class AddClientRepositoryImpl implements AddClientRepository {
     try {
       await addClientRemoteDataSource.addClient(name: name);
       return const Right(null);
-    } on Failure catch (e) {
-      return Left(e);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
     }
   }
 }
