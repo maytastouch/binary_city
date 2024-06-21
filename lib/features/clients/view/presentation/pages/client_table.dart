@@ -1,4 +1,6 @@
 import 'package:binary_city/core/common/entities/client_entity.dart';
+import 'package:binary_city/core/common/widgets/loader.dart';
+import 'package:binary_city/core/utils/show_snackbar.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,10 +39,13 @@ class _ClientDataTableState extends State<ClientDataTable> {
       child: BlocConsumer<ClientViewBloc, ClientViewState>(
         listener: (context, state) {
           // Implement listener if needed
+          if (state is GetClientsFailure) {
+            showBotToast(state.message);
+          }
         },
         builder: (context, state) {
           if (state is GetClientsLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Loader();
           } else if (state is GetClientsSuccess) {
             return PaginatedDataTable2(
               sortAscending: true,

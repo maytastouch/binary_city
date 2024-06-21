@@ -8,6 +8,7 @@ import '../../../../../core/common/dashboard/presentation/bloc/selected_index.da
 import '../../../../../core/common/widgets/text_widget.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/utils/utils.dart';
+import '../bloc/client_view_bloc.dart';
 import 'client_table.dart';
 
 class ClientsPage extends StatefulWidget {
@@ -59,6 +60,7 @@ class _ClientsPageState extends State<ClientsPage> {
                     setState(() {
                       _isPressed1 = false;
                     });
+                    context.read<ClientViewBloc>().add(GetClientsEvent());
                   },
                   child: TextWidget(
                     text: 'Clients',
