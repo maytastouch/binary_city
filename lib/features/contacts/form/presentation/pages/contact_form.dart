@@ -129,15 +129,15 @@ class _ContactFormState extends State<ContactForm> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AddContactTextField(
-                          hint: 'Name',
+                          hint: 'First Name',
                           controller: nameController,
-                          label: 'Name',
+                          label: 'First Name',
                           enableValidation: true,
                         ),
                         AddContactTextField(
-                          hint: 'Surname',
+                          hint: 'Last Name',
                           controller: surnameController,
-                          label: 'Surname',
+                          label: 'Last Name',
                           enableValidation: true,
                         ),
                       ],
