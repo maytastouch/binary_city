@@ -28,8 +28,27 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
         asciiValue++;
       }
 
-      // Generate a unique numeric code
+      // Ensure the alpha part is exactly 3 characters
+      clientCodeAlpha = clientCodeAlpha.substring(0, 3);
+
+      // Fetch the maximum numeric code from the database
+      final maxCodeResponse = await supabaseClient
+          .from(AppConstants.clientStable)
+          .select('client_code')
+          .order('client_code', ascending: false)
+          .limit(1)
+          .maybeSingle();
+
       int numericCode = 1;
+      if (maxCodeResponse != null &&
+          maxCodeResponse.containsKey('data') &&
+          maxCodeResponse['data'] != null &&
+          maxCodeResponse['data'].isNotEmpty) {
+        String maxCode = maxCodeResponse['data'][0]['client_code'];
+        numericCode = int.parse(maxCode.substring(3)) + 1;
+      }
+      // Generate a unique client code
+
       String clientCode;
       bool isUnique = false;
       do {
@@ -40,7 +59,7 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
             .eq('client_code', clientCode)
             .maybeSingle();
 
-        if (response == null || response['error'] != null) {
+        if (response == null || response.containsKey('error')) {
           isUnique = true;
         } else {
           numericCode++;
@@ -50,6 +69,9 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
       await supabaseClient
           .from(AppConstants.clientStable)
           .insert({'name': name, 'client_code': clientCode});
+
+      // Optionally, return or log the clientCode if needed
+      print('Client code generated: $clientCode');
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
     } catch (e) {
