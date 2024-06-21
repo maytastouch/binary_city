@@ -44,7 +44,7 @@ class _SideBarState extends State<SideBar> {
       builder: (context, state) {
         return Container(
           color:
-              isDark ? AppColors.sideBarDarkModeColor : AppColors.sideBarColor,
+              isDark ? AppColors.sideBarDarkModeColor : AppColors.primaryColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

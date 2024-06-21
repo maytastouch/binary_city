@@ -50,7 +50,7 @@ class _ListTilesState extends State<ListTiles> {
       backgroundColor = isDark ? AppColors.primaryColor : Colors.white;
     } else {
       backgroundColor =
-          isDark ? AppColors.sideBarDarkModeColor : AppColors.sideBarColor;
+          isDark ? AppColors.sideBarDarkModeColor : AppColors.primaryColor;
     }
     return MouseRegion(
       onEnter: (_) {
