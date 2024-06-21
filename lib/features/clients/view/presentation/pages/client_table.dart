@@ -44,9 +44,7 @@ class _ClientDataTableState extends State<ClientDataTable> {
           }
         },
         builder: (context, state) {
-          if (state is GetClientsLoading) {
-            return const Loader();
-          } else if (state is GetClientsSuccess) {
+          if (state is GetClientsSuccess) {
             return PaginatedDataTable2(
               sortAscending: true,
               showCheckboxColumn: true,
@@ -95,10 +93,8 @@ class _ClientDataTableState extends State<ClientDataTable> {
                 onPressed: widget.onPressed,
               ),
             );
-          } else if (state is GetClientsFailure) {
-            return Center(child: Text(state.message));
           } else {
-            return const Center(child: Text('No data available'));
+            return const Loader();
           }
         },
       ),
