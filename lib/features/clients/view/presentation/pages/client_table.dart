@@ -33,6 +33,7 @@ class _ClientDataTableState extends State<ClientDataTable> {
   Widget build(BuildContext context) {
     final utils = Utils(context);
     Color color = utils.color;
+    List<ClientEntity> clients = [];
 
     return Padding(
       padding: const EdgeInsets.only(top: 20),
@@ -45,6 +46,7 @@ class _ClientDataTableState extends State<ClientDataTable> {
         },
         builder: (context, state) {
           if (state is GetClientsSuccess) {
+            clients = state.clients;
             return PaginatedDataTable2(
               sortAscending: true,
               showCheckboxColumn: true,
@@ -94,7 +96,54 @@ class _ClientDataTableState extends State<ClientDataTable> {
               ),
             );
           } else {
-            return const Loader();
+            return PaginatedDataTable2(
+              sortAscending: true,
+              showCheckboxColumn: true,
+              renderEmptyRowsInTheEnd: false,
+              wrapInCard: false,
+              headingRowHeight: 50,
+              headingRowDecoration: const BoxDecoration(
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+              columnSpacing: 12,
+              horizontalMargin: 12,
+              rowsPerPage: 6,
+              columns: const [
+                DataColumn2(
+                  label: Text(
+                    'Name',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.L,
+                  fixedWidth: 190,
+                ),
+                DataColumn2(
+                  label: Text(
+                    'Client Code',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.S,
+                ),
+                DataColumn(
+                  label: Text(
+                    'No. of Linked Contacts',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                ),
+              ],
+              source: ClientDataSource(
+                clients: clients,
+                isChecked: widget.isChecked,
+                onChanged: widget.onChanged,
+                color: color,
+                context: context,
+                onPressed: widget.onPressed,
+              ),
+            );
           }
         },
       ),
