@@ -1,3 +1,4 @@
+import 'package:binary_city/core/common/widgets/text_widget.dart';
 import 'package:binary_city/core/utils/show_snackbar.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -90,13 +91,14 @@ class _ContactDataTableState extends State<ContactDataTable> {
                     'Email Address',
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
-                  size: ColumnSize.S,
+                  size: ColumnSize.L,
                 ),
-                DataColumn(
+                DataColumn2(
                   label: Text(
                     'No. of Linked Clients',
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
+                  size: ColumnSize.S,
                 ),
               ],
               source: ContactsDataSource(
@@ -147,12 +149,15 @@ class _ContactDataTableState extends State<ContactDataTable> {
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
                   size: ColumnSize.S,
+                  fixedWidth: 150,
                 ),
-                DataColumn(
+                DataColumn2(
                   label: Text(
                     'No. of Linked Clients',
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
+                  size: ColumnSize.S,
+                  fixedWidth: 10,
                 ),
               ],
               source: ContactsDataSource(
@@ -208,7 +213,13 @@ class ContactsDataSource extends DataTableSource {
       cells: [
         DataCell(Text(contact.firstName)),
         DataCell(Text(contact.lastName)),
-        DataCell(Text(contact.email)),
+        DataCell(TextWidget(
+          text: contact.email,
+          color: color,
+          textSize: 14,
+          hoverColor: color,
+          maxLines: 1,
+        )),
         const DataCell(Text('4')),
       ],
     );
