@@ -12,5 +12,10 @@ import 'features/clients/view/data/repository/client_view_repo_impl.dart';
 import 'features/clients/view/domain/repository/client_view_repo.dart';
 import 'features/clients/view/domain/usecases/get_clients.dart';
 import 'features/clients/view/presentation/bloc/client_view_bloc.dart';
+import 'features/contacts/form/data/datasources/contact_form_remote_datasource.dart';
+import 'features/contacts/form/data/repository/contact_form_repo_impl.dart';
+import 'features/contacts/form/domain/repository/contact_form_repo.dart';
+import 'features/contacts/form/domain/usecases/create_contact.dart';
+import 'features/contacts/form/presentation/bloc/create_form_bloc.dart';
 
 part 'init_dependencies.main.dart';
