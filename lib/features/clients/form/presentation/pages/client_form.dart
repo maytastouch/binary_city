@@ -1,3 +1,4 @@
+import 'package:binary_city/core/common/entities/contact_entity.dart';
 import 'package:binary_city/core/utils/show_snackbar.dart';
 import 'package:binary_city/core/utils/utils.dart';
 import 'package:binary_city/features/clients/form/presentation/pages/client_form_table.dart';
@@ -24,14 +25,23 @@ class _ClientFormState extends State<ClientForm> {
   final formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController clientCodeController = TextEditingController();
+  List<ContactEntity> allContacts = [];
 
   bool _isLoading = false;
+  bool isLinkClientPressed = false;
 
   @override
   void dispose() {
     nameController.dispose();
     clientCodeController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    context.read<AddClientBloc>().add(GetAllContactEvent());
+    allContacts = AddClientBloc.allContacts;
+    super.initState();
   }
 
   @override
@@ -81,7 +91,9 @@ class _ClientFormState extends State<ClientForm> {
                       button_title: ' + Link Contact',
                       radius: 10,
                       onPressed: () {
-                        setState(() {});
+                        setState(() {
+                          isLinkClientPressed = !isLinkClientPressed;
+                        });
                       },
                       child: null,
                       isRed: true,
@@ -183,11 +195,57 @@ class _ClientFormState extends State<ClientForm> {
                       ),
                       width: MediaQuery.of(context).size.width,
                       height: 300,
-                      child: ClientFormDataTable(
-                        isChecked: false,
-                        onChanged: (bool? value) {},
-                        color: color,
-                        onPressed: () {},
+                      child: Column(
+                        children: [
+                          if (isLinkClientPressed)
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: BlocBuilder<AddClientBloc, AddClientState>(
+                                builder: (context, state) {
+                                  if (state is GetAllContactsLoaded) {
+                                    allContacts = state.contacts;
+                                  }
+                                  return Row(
+                                    children: allContacts
+                                        .map((contact) => Padding(
+                                              padding: const EdgeInsets.all(3),
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  //border color
+                                                  border: Border.all(
+                                                    color: color,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: TextWidget(
+                                                  text:
+                                                      '${contact.firstName} ${contact.lastName}',
+                                                  color: color,
+                                                  textSize:
+                                                      AppConstants.mainFont5,
+                                                  hoverColor: color,
+                                                ),
+                                              ),
+                                            ))
+                                        .toList(),
+                                  );
+                                },
+                              ),
+                            ),
+                          Expanded(
+                            child: ClientFormDataTable(
+                              isChecked: false,
+                              onChanged: (bool? value) {},
+                              color: color,
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
                       )),
                 ],
               ),

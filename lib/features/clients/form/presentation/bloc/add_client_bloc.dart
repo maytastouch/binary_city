@@ -1,5 +1,4 @@
 import 'package:binary_city/features/clients/form/domain/usecases/add_client.dart';
-import 'package:binary_city/features/contacts/view/domain/usecases/get_all_contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +41,7 @@ class AddClientBloc extends Bloc<AddClientEvent, AddClientState> {
     GetAllContactEvent event,
     Emitter<AddClientState> emit,
   ) async {
-    emit(AddClientLoading());
+    //emit(AddClientLoading());
     final result = await _getAllContactsUseCase(NoParams());
     result
         .fold((failure) => emit(GetAllContactsFailed(message: failure.message)),

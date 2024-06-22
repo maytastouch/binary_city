@@ -46,7 +46,7 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
         ),
         columnSpacing: 12,
         horizontalMargin: 12,
-        rowsPerPage: 4,
+        rowsPerPage: 3,
         columns: const [
           DataColumn2(
             label: Text(
