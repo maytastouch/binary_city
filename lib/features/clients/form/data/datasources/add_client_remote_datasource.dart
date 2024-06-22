@@ -6,7 +6,7 @@ import '../../../../../core/common/models/contact_model.dart';
 
 abstract interface class AddClientRemoteDataSource {
   // Add client to database
-  Future<Map<String, dynamic>> addClient({
+  Future<String> addClient({
     required String name,
     required List<String> contactIds,
   });
@@ -21,7 +21,7 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
   AddClientRemoteDatasourceImpl(this.supabaseClient);
 
   @override
-  Future<Map<String, dynamic>> addClient(
+  Future<String> addClient(
       {required String name, required List<String> contactIds}) async {
     try {
       // Extract the first three characters and convert to uppercase
@@ -93,22 +93,7 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
             .from(AppConstants.linkTable)
             .insert(clientContactLinks);
       }
-
-      // Query to count the number of linked contacts for the newly created client
-      final contactsCountResponse = await supabaseClient
-          .from(AppConstants
-              .linkTable) // Assuming 'client_contacts' is the table name
-          .select('contact_id')
-          .count(CountOption
-              .exact); // Assuming 'contact_id' is the column to count
-
-      int contactsCount = 0;
-      if (contactsCountResponse.data.isNotEmpty) {
-        contactsCount = contactsCountResponse
-            .data.length; // Or use the count property if available
-      }
-      // Return both clientId and contactsCount
-      return {'clientId': clientId, 'numberOfLinkedContacts': contactsCount};
+      return clientId;
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
     } catch (e) {

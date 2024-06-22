@@ -10,10 +10,10 @@ final class AddClientLoading extends AddClientState {}
 final class AddClientSuccess extends AddClientState {
   final String message;
   final String code;
-  final int numberOfLinkedContacts;
+  //final int numberOfLinkedContacts;
 
   AddClientSuccess({
-    required this.numberOfLinkedContacts,
+    // required this.numberOfLinkedContacts,
     required this.message,
     required this.code,
   });
