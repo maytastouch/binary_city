@@ -55,6 +55,11 @@ class _ContactFormState extends State<ContactForm> {
             isLoading = false;
           });
           showBotToast(state.message);
+
+          //clear controllers
+          emailController.clear();
+          nameController.clear();
+          surnameController.clear();
         }
         if (state is CreateFormFailure) {
           setState(() {
