@@ -1,8 +1,12 @@
+import 'package:binary_city/core/utils/show_snackbar.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/utils.dart';
+import '../../../../../core/common/entities/contact_entity.dart';
 import '../../../../../core/constants/colors.dart';
+import '../bloc/contact_view_bloc.dart';
 
 // ignore: must_be_immutable
 class ContactDataTable extends StatefulWidget {
@@ -24,6 +28,14 @@ class ContactDataTable extends StatefulWidget {
 }
 
 class _ContactDataTableState extends State<ContactDataTable> {
+  List<ContactEntity> contacts = [];
+
+  @override
+  void initState() {
+    contacts = ContactViewBloc.allContactList;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
@@ -31,65 +43,136 @@ class _ContactDataTableState extends State<ContactDataTable> {
 
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: PaginatedDataTable2(
-        sortAscending: true,
-        showCheckboxColumn: true,
-        renderEmptyRowsInTheEnd: false,
-        wrapInCard: false,
-        headingRowHeight: 50,
-        headingRowDecoration: const BoxDecoration(
-          color: AppColors.primaryColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          ),
-        ),
-        columnSpacing: 12,
-        horizontalMargin: 12,
-        rowsPerPage: 9,
-        columns: const [
-          DataColumn2(
-            label: Text(
-              'Name',
-              style: TextStyle(color: AppColors.whiteColor),
-            ),
-            size: ColumnSize.L,
-            fixedWidth: 190,
-          ),
-          DataColumn2(
-            label: Text(
-              'Surname',
-              style: TextStyle(color: AppColors.whiteColor),
-            ),
-            size: ColumnSize.S,
-          ),
-          DataColumn2(
-            label: Text(
-              'Email Address',
-              style: TextStyle(color: AppColors.whiteColor),
-            ),
-            size: ColumnSize.S,
-          ),
-          DataColumn(
-            label: Text(
-              'No. of Linked Clients',
-              style: TextStyle(color: AppColors.whiteColor),
-            ),
-          ),
-        ],
-        source: ContactsDataSource(
-          isChecked: widget.isChecked,
-          onChanged: widget.onChanged,
-          color: color,
-          context: context,
-          onPressed: widget.onPressed,
-        ),
+      child: BlocConsumer<ContactViewBloc, ContactViewState>(
+        listener: (context, state) {
+          if (state is GetAllContactsError) {
+            // Implement listener if needed
+            showBotToast(state.message);
+          }
+        },
+        builder: (context, state) {
+          if (state is GetAllContactsLoaded) {
+            contacts = state.contactList;
+            return PaginatedDataTable2(
+              sortAscending: true,
+              showCheckboxColumn: true,
+              renderEmptyRowsInTheEnd: false,
+              wrapInCard: false,
+              headingRowHeight: 50,
+              headingRowDecoration: const BoxDecoration(
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+              columnSpacing: 12,
+              horizontalMargin: 12,
+              rowsPerPage: 9,
+              columns: const [
+                DataColumn2(
+                  label: Text(
+                    'Name',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.L,
+                  fixedWidth: 190,
+                ),
+                DataColumn2(
+                  label: Text(
+                    'Surname',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.S,
+                ),
+                DataColumn2(
+                  label: Text(
+                    'Email Address',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.S,
+                ),
+                DataColumn(
+                  label: Text(
+                    'No. of Linked Clients',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                ),
+              ],
+              source: ContactsDataSource(
+                contacts: state.contactList,
+                isChecked: widget.isChecked,
+                onChanged: widget.onChanged,
+                color: color,
+                context: context,
+                onPressed: widget.onPressed,
+              ),
+            );
+          } else {
+            return PaginatedDataTable2(
+              sortAscending: true,
+              showCheckboxColumn: true,
+              renderEmptyRowsInTheEnd: false,
+              wrapInCard: false,
+              headingRowHeight: 50,
+              headingRowDecoration: const BoxDecoration(
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+              columnSpacing: 12,
+              horizontalMargin: 12,
+              rowsPerPage: 9,
+              columns: const [
+                DataColumn2(
+                  label: Text(
+                    'Name',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.L,
+                  fixedWidth: 190,
+                ),
+                DataColumn2(
+                  label: Text(
+                    'Surname',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.S,
+                ),
+                DataColumn2(
+                  label: Text(
+                    'Email Address',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                  size: ColumnSize.S,
+                ),
+                DataColumn(
+                  label: Text(
+                    'No. of Linked Clients',
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                ),
+              ],
+              source: ContactsDataSource(
+                contacts: contacts,
+                isChecked: widget.isChecked,
+                onChanged: widget.onChanged,
+                color: color,
+                context: context,
+                onPressed: widget.onPressed,
+              ),
+            );
+          }
+        },
       ),
     );
   }
 }
 
 class ContactsDataSource extends DataTableSource {
+  final List<ContactEntity> contacts;
   final bool isChecked;
   final Function(bool?) onChanged;
   final Color color;
@@ -97,6 +180,7 @@ class ContactsDataSource extends DataTableSource {
   final VoidCallback onPressed;
 
   ContactsDataSource({
+    required this.contacts,
     required this.onPressed,
     required this.isChecked,
     required this.onChanged,
@@ -106,9 +190,13 @@ class ContactsDataSource extends DataTableSource {
 
   @override
   DataRow2? getRow(int index) {
+    if (index >= contacts.length) return null;
+    final contact = contacts[index];
     return DataRow2(
-      onSelectChanged: (bool? selected) {},
-      onTap: () {},
+      onSelectChanged: (bool? selected) {
+        onChanged(selected);
+      },
+      onTap: onPressed,
       color: WidgetStateProperty.resolveWith<Color?>(
         (Set<WidgetState> states) {
           if (states.contains(WidgetState.selected)) {
@@ -117,7 +205,12 @@ class ContactsDataSource extends DataTableSource {
           return null;
         },
       ),
-      cells: const [],
+      cells: [
+        DataCell(Text(contact.firstName)),
+        DataCell(Text(contact.lastName)),
+        DataCell(Text(contact.email)),
+        const DataCell(Text('4')),
+      ],
     );
   }
 
@@ -125,8 +218,8 @@ class ContactsDataSource extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 0;
+  int get rowCount => contacts.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => contacts.where((client) => isChecked).length;
 }

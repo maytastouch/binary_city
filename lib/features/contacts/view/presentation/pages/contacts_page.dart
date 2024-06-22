@@ -1,4 +1,5 @@
 import 'package:binary_city/core/constants/constants.dart';
+import 'package:binary_city/features/contacts/view/presentation/bloc/contact_view_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,6 +60,7 @@ class _ContactsPageState extends State<ContactsPage> {
                     setState(() {
                       _isPressed1 = false;
                     });
+                    context.read<ContactViewBloc>().add(GetAllContactsEvent());
                   },
                   child: TextWidget(
                     text: 'Contacts',

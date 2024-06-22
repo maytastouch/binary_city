@@ -5,7 +5,7 @@ class ContactModel extends ContactEntity {
     required super.firstName,
     required super.lastName,
     required super.email,
-    required super.numberOfLinkedClients,
+    //required super.numberOfLinkedClients,
   });
 
   factory ContactModel.fromJson(Map<String, dynamic> json) {
@@ -13,7 +13,7 @@ class ContactModel extends ContactEntity {
       firstName: json['first_name'],
       lastName: json['last_name'],
       email: json['email'],
-      numberOfLinkedClients: json['number_of_linked_clients'],
+      //numberOfLinkedClients: json['number_of_linked_clients'],
     );
   }
 
@@ -22,7 +22,7 @@ class ContactModel extends ContactEntity {
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
-      'number_of_linked_clients': numberOfLinkedClients,
+      // 'number_of_linked_clients': numberOfLinkedClients,
     };
   }
 
@@ -36,8 +36,8 @@ class ContactModel extends ContactEntity {
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
-      numberOfLinkedClients:
-          numberOfLinkedClients ?? this.numberOfLinkedClients,
+      //numberOfLinkedClients:
+      //    numberOfLinkedClients ?? this.numberOfLinkedClients,
     );
   }
 }
