@@ -29,7 +29,7 @@ class _ContactsPageState extends State<ContactsPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height: 600,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
