@@ -148,8 +148,7 @@ class _ContactDataTableState extends State<ContactDataTable> {
                     'Email Address',
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
-                  size: ColumnSize.S,
-                  fixedWidth: 150,
+                  size: ColumnSize.L,
                 ),
                 DataColumn2(
                   label: Text(
@@ -157,7 +156,6 @@ class _ContactDataTableState extends State<ContactDataTable> {
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
                   size: ColumnSize.S,
-                  fixedWidth: 10,
                 ),
               ],
               source: ContactsDataSource(
