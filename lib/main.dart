@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:io' show Platform;
 import 'package:binary_city/core/theme/bloc/theme_state.dart';
 import 'package:binary_city/features/clients/form/presentation/bloc/add_client_bloc.dart';
+import 'package:binary_city/features/contacts/view/presentation/bloc/contact_view_bloc.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:binary_city/core/common/dashboard/presentation/pages/dashboard.dart';
@@ -49,6 +50,9 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<CreateFormBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<ContactViewBloc>(),
         ),
       ],
       child: const MyApp(),

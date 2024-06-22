@@ -17,5 +17,10 @@ import 'features/contacts/form/data/repository/contact_form_repo_impl.dart';
 import 'features/contacts/form/domain/repository/contact_form_repo.dart';
 import 'features/contacts/form/domain/usecases/create_contact.dart';
 import 'features/contacts/form/presentation/bloc/create_form_bloc.dart';
+import 'features/contacts/view/data/datasources/contact_view_remotedatasource.dart';
+import 'features/contacts/view/data/repository/contact_view_repo_impl.dart';
+import 'features/contacts/view/domain/repository/contact_view_repo.dart';
+import 'features/contacts/view/domain/usecases/get_all_contacts.dart';
+import 'features/contacts/view/presentation/bloc/contact_view_bloc.dart';
 
 part 'init_dependencies.main.dart';

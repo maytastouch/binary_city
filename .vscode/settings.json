@@ -9,6 +9,7 @@
         "mocktail",
         "Postgrest",
         "prefs",
+        "remotedatasource",
         "supabase",
         "swiper",
         "usecase",

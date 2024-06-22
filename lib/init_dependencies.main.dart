@@ -10,6 +10,7 @@ Future<void> initDependencies() async {
   _addClientBloc();
   _clientViewBloc();
   _createFormBloc();
+  _contactViewBloc();
 
   serviceLocator.registerLazySingleton(() => supabase.client);
 }
@@ -100,6 +101,36 @@ _createFormBloc() {
   serviceLocator.registerLazySingleton(
     () => CreateFormBloc(
       createContactUseCase: serviceLocator(),
+    ),
+  );
+}
+
+void _contactViewBloc() {
+  //datasource
+  serviceLocator.registerFactory<ContactViewRemoteDataSource>(
+    () => ContactViewRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  //repository
+  serviceLocator.registerFactory<ContactViewRepository>(
+    () => ContactViewRepositoryImpl(
+      serviceLocator(),
+    ),
+  );
+
+  //usecase
+  serviceLocator.registerFactory<GetAllContactsUseCase>(
+    () => GetAllContactsUseCase(
+      serviceLocator(),
+    ),
+  );
+
+  //bloc
+  serviceLocator.registerLazySingleton(
+    () => ContactViewBloc(
+      getAllContactsUseCase: serviceLocator(),
     ),
   );
 }
