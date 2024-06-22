@@ -107,7 +107,7 @@ class _ClientFormState extends State<ClientForm> {
                         if (formKey.currentState!.validate()) {
                           context.read<AddClientBloc>().add(AddClientsEvent(
                                 name: nameController.text,
-                                contactIds: const [],
+                                contactIds: contactID,
                               ));
                         }
                       },
