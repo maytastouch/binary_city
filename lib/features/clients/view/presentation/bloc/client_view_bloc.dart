@@ -9,6 +9,8 @@ part 'client_view_event.dart';
 part 'client_view_state.dart';
 
 class ClientViewBloc extends Bloc<ClientViewEvent, ClientViewState> {
+  static List<ClientEntity> allClients = [];
+
   final GetClientsUseCase _getClientUseCase;
   ClientViewBloc({required GetClientsUseCase getClientUseCase})
       : _getClientUseCase = getClientUseCase,
@@ -24,7 +26,10 @@ class ClientViewBloc extends Bloc<ClientViewEvent, ClientViewState> {
     final result = await _getClientUseCase(NoParams());
     result.fold(
       (failure) => emit(GetClientsFailure(failure.message)),
-      (clients) => emit(GetClientsSuccess(clients)),
+      (clients) {
+        emit(GetClientsSuccess(clients));
+        allClients = clients;
+      },
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:binary_city/core/common/entities/client_entity.dart';
-import 'package:binary_city/core/common/widgets/loader.dart';
 import 'package:binary_city/core/utils/show_snackbar.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +28,17 @@ class ClientDataTable extends StatefulWidget {
 }
 
 class _ClientDataTableState extends State<ClientDataTable> {
+  List<ClientEntity> clients = [];
+  @override
+  void initState() {
+    clients = ClientViewBloc.allClients;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
     Color color = utils.color;
-    List<ClientEntity> clients = [];
 
     return Padding(
       padding: const EdgeInsets.only(top: 20),
