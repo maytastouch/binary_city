@@ -4,14 +4,14 @@ class ClientModel extends ClientEntity {
   ClientModel({
     required super.name,
     required super.clientCode,
-    //required super.numberOfLinkedContacts,
+    required super.numberOfLinkedContacts,
   });
 
   factory ClientModel.fromJson(Map<String, dynamic> json) {
     return ClientModel(
       name: json['name'],
       clientCode: json['client_code'],
-      //numberOfLinkedContacts: json['number_of_linked_contacts'],
+      numberOfLinkedContacts: json['number_of_linked_contacts'],
     );
   }
 
@@ -19,20 +19,20 @@ class ClientModel extends ClientEntity {
     return {
       'name': name,
       'client_code': clientCode,
-      //'number_of_linked_contacts': numberOfLinkedContacts,
+      'number_of_linked_contacts': numberOfLinkedContacts,
     };
   }
 
   ClientModel copyWith({
     String? name,
     String? clientCode,
-   // int? numberOfLinkedContacts,
+    int? numberOfLinkedContacts,
   }) {
     return ClientModel(
       name: name ?? this.name,
       clientCode: clientCode ?? this.clientCode,
-    //  numberOfLinkedContacts:
-     //     numberOfLinkedContacts ?? this.numberOfLinkedContacts,
+      numberOfLinkedContacts:
+          numberOfLinkedContacts ?? this.numberOfLinkedContacts,
     );
   }
 }

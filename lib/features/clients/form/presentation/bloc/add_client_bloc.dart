@@ -37,8 +37,10 @@ class AddClientBloc extends Bloc<AddClientEvent, AddClientState> {
     );
     result.fold(
       (failure) => emit(AddClientFailure(message: failure.message)),
-      (res) => emit(
-          AddClientSuccess(message: 'Client added successfully', code: res)),
+      (res) => emit(AddClientSuccess(
+          message: 'Client added successfully',
+          code: res['clientId'],
+          numberOfLinkedContacts: res['numberOfLinkedContacts'])),
     );
   }
 

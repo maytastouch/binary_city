@@ -13,7 +13,7 @@ class AddClientRepositoryImpl implements AddClientRepository {
 
   AddClientRepositoryImpl(this.addClientRemoteDataSource);
   @override
-  Future<Either<Failure, String>> addClient({
+  Future<Either<Failure, Map<String, dynamic>>> addClient({
     required String name,
     required List<String> contactIds,
   }) async {
