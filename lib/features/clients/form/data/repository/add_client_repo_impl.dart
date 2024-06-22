@@ -1,3 +1,4 @@
+import 'package:binary_city/core/common/entities/contact_entity.dart';
 import 'package:binary_city/core/error/exceptions.dart';
 import 'package:binary_city/core/error/failures.dart';
 
@@ -15,7 +16,17 @@ class AddClientRepositoryImpl implements AddClientRepository {
   Future<Either<Failure, String>> addClient({required String name}) async {
     try {
       final res = await addClientRemoteDataSource.addClient(name: name);
-      return  Right(res);
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ContactEntity>>> getAllContacts() async {
+    try {
+      final res = await addClientRemoteDataSource.getAllContacts();
+      return Right(res);
     } on ServerException catch (e) {
       return Left(Failure(e.message));
     }

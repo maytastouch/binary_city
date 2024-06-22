@@ -17,32 +17,39 @@ Future<void> initDependencies() async {
 
 void _addClientBloc() {
   //datasource
-  serviceLocator.registerFactory<AddClientRemoteDataSource>(
-    () => AddClientRemoteDatasourceImpl(
-      serviceLocator(),
-    ),
-  );
+  serviceLocator
+    ..registerFactory<AddClientRemoteDataSource>(
+      () => AddClientRemoteDatasourceImpl(
+        serviceLocator(),
+      ),
+    )
 
-  //repository
-  serviceLocator.registerFactory<AddClientRepository>(
-    () => AddClientRepositoryImpl(
-      serviceLocator(),
-    ),
-  );
+    //repository
+    ..registerFactory<AddClientRepository>(
+      () => AddClientRepositoryImpl(
+        serviceLocator(),
+      ),
+    )
 
-  //usecase
-  serviceLocator.registerFactory<AddClientUseCase>(
-    () => AddClientUseCase(
-      serviceLocator(),
-    ),
-  );
+    //usecase
+    ..registerFactory<AddClientUseCase>(
+      () => AddClientUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory<GetAllContactUseCase>(
+      () => GetAllContactUseCase(
+        serviceLocator(),
+      ),
+    )
 
-  //bloc
-  serviceLocator.registerLazySingleton(
-    () => AddClientBloc(
-      addClientUseCase: serviceLocator(),
-    ),
-  );
+    //bloc
+    ..registerLazySingleton(
+      () => AddClientBloc(
+        addClientUseCase: serviceLocator(),
+        getAllContactsUseCase: serviceLocator(),
+      ),
+    );
 }
 
 _clientViewBloc() {

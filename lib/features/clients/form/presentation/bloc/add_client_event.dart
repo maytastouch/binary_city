@@ -8,3 +8,5 @@ final class AddClientsEvent extends AddClientEvent {
 
   AddClientsEvent({required this.name});
 }
+
+final class GetAllContactEvent extends AddClientEvent {}

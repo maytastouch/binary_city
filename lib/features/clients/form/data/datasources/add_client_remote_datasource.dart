@@ -2,11 +2,15 @@ import 'package:binary_city/core/constants/constants.dart';
 import 'package:binary_city/core/error/exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../../core/common/models/contact_model.dart';
+
 abstract interface class AddClientRemoteDataSource {
   // Add client to database
   Future<String> addClient({
     required String name,
   });
+  //get all contacts
+  Future<List<ContactModel>> getAllContacts();
 }
 
 class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
@@ -72,6 +76,20 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
 
       // Optionally, return or log the clientCode if needed
       return clientCode;
+    } on PostgrestException catch (e) {
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<List<ContactModel>> getAllContacts() async {
+    try {
+      final response =
+          await supabaseClient.from(AppConstants.contactsTable).select("*");
+
+      return response.map((e) => ContactModel.fromJson(e)).toList();
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
     } catch (e) {

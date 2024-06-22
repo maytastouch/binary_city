@@ -22,3 +22,14 @@ final class AddClientFailure extends AddClientState {
 
   AddClientFailure({required this.message});
 }
+final class GetAllContactsLoaded extends AddClientState {
+  final List<ContactEntity> contacts;
+
+  GetAllContactsLoaded({required this.contacts});
+}
+
+final class GetAllContactsFailed extends AddClientState {
+  final String message;
+
+  GetAllContactsFailed({required this.message});
+}

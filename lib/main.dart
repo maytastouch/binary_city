@@ -71,6 +71,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     context.read<ClientViewBloc>().add(GetClientsEvent());
+    context.read<AddClientBloc>().add(GetAllContactEvent());
     context.read<ContactViewBloc>().add(GetAllContactsEvent());
     super.initState();
   }
