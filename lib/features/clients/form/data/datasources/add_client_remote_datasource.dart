@@ -85,8 +85,8 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
       // Link contacts to the client
       if (contactIds.isNotEmpty) {
         final List<Map<String, dynamic>> clientContactLinks = contactIds
-            .map((contactId) =>
-                {'client_id': clientId, 'contacts_id': contactId})
+            .map(
+                (contactId) => {'client_id': clientId, 'contact_id': contactId})
             .toList();
 
         await supabaseClient
