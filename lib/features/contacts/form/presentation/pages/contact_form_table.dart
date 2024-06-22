@@ -50,7 +50,7 @@ class _ContactFormDataTableState extends State<ContactFormDataTable> {
         columns: const [
           DataColumn2(
             label: Text(
-              'Full Name',
+              'Client Name',
               style: TextStyle(color: AppColors.whiteColor),
             ),
             size: ColumnSize.L,
