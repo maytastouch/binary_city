@@ -26,6 +26,7 @@ class _ClientFormState extends State<ClientForm> {
   TextEditingController nameController = TextEditingController();
   TextEditingController clientCodeController = TextEditingController();
   List<ContactEntity> allContacts = [];
+  List<String> contactID = [];
 
   bool _isLoading = false;
   bool isLinkClientPressed = false;
@@ -104,9 +105,10 @@ class _ClientFormState extends State<ClientForm> {
                       radius: 10,
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          context
-                              .read<AddClientBloc>()
-                              .add(AddClientsEvent(name: nameController.text));
+                          context.read<AddClientBloc>().add(AddClientsEvent(
+                                name: nameController.text,
+                                contactIds: const [],
+                              ));
                         }
                       },
                       child: _isLoading ? const Loader() : null,
@@ -210,15 +212,35 @@ class _ClientFormState extends State<ClientForm> {
                                         .map((contact) => Padding(
                                               padding: const EdgeInsets.all(3),
                                               child: ChoiceChip(
+                                                avatar: contactID
+                                                        .contains(contact.id)
+                                                    ? const Icon(Icons.check,
+                                                        size: 20.0)
+                                                    : null, // Show a check icon when selected
                                                 label: Text(
                                                     '${contact.firstName} ${contact.lastName}'),
-                                                selected:
-                                                    false, // You can manage the selected state as needed
+                                                selected: contactID
+                                                    .contains(contact.id),
                                                 onSelected: (bool selected) {
-                                                  // Handle chip selection
+                                                  setState(() {
+                                                    // Use setState or equivalent in your state management
+                                                    if (selected) {
+                                                      if (!contactID.contains(
+                                                          contact.id)) {
+                                                        contactID
+                                                            .add(contact.id);
+                                                      }
+                                                    } else {
+                                                      contactID
+                                                          .remove(contact.id);
+                                                    }
+                                                  });
                                                 },
                                                 backgroundColor:
                                                     Colors.transparent,
+                                                selectedColor: Colors.blue
+                                                    .withOpacity(
+                                                        0.5), // Optional: Change background color when selected
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -229,7 +251,10 @@ class _ClientFormState extends State<ClientForm> {
                                                   ),
                                                 ),
                                                 labelStyle: TextStyle(
-                                                  color: color, // Text color
+                                                  color: contactID
+                                                          .contains(contact.id)
+                                                      ? Colors.white
+                                                      : color, // Corrected line
                                                   fontSize: AppConstants
                                                       .mainFont5, // Assuming 'AppConstants.mainFont5' is defined in your scope
                                                 ),

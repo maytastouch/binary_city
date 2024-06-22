@@ -5,6 +5,7 @@ class ContactModel extends ContactEntity {
     required super.firstName,
     required super.lastName,
     required super.email,
+    required super.id,
     //required super.numberOfLinkedClients,
   });
 
@@ -13,6 +14,7 @@ class ContactModel extends ContactEntity {
       firstName: json['first_name'],
       lastName: json['last_name'],
       email: json['email'],
+      id: json['contacts_id'],
       //numberOfLinkedClients: json['number_of_linked_clients'],
     );
   }
@@ -22,6 +24,7 @@ class ContactModel extends ContactEntity {
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
+      'contacts_id': id,
       // 'number_of_linked_clients': numberOfLinkedClients,
     };
   }
@@ -30,12 +33,14 @@ class ContactModel extends ContactEntity {
     String? firstName,
     String? lastName,
     String? email,
-    int? numberOfLinkedClients,
+    String? id,
+    //int? numberOfLinkedClients,
   }) {
     return ContactModel(
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
+      id: id ?? this.id,
       //numberOfLinkedClients:
       //    numberOfLinkedClients ?? this.numberOfLinkedClients,
     );

@@ -5,8 +5,12 @@ sealed class AddClientEvent {}
 
 final class AddClientsEvent extends AddClientEvent {
   final String name;
+  final List<String> contactIds;
 
-  AddClientsEvent({required this.name});
+  AddClientsEvent({
+    required this.name,
+    required this.contactIds,
+  });
 }
 
 final class GetAllContactEvent extends AddClientEvent {}

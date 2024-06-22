@@ -7,6 +7,7 @@ abstract interface class AddClientRepository {
   // add client to database
   Future<Either<Failure, String>> addClient({
     required String name,
+    required List<String> contactIds,
   });
 
   //get all contacts

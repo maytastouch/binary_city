@@ -29,7 +29,12 @@ class AddClientBloc extends Bloc<AddClientEvent, AddClientState> {
     Emitter<AddClientState> emit,
   ) async {
     emit(AddClientLoading());
-    final result = await _addClientUseCase(AddClientParams(name: event.name));
+    final result = await _addClientUseCase(
+      AddClientParams(
+        name: event.name,
+        contactIds: event.contactIds,
+      ),
+    );
     result.fold(
       (failure) => emit(AddClientFailure(message: failure.message)),
       (res) => emit(

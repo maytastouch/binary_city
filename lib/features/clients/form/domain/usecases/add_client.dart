@@ -12,12 +12,19 @@ class AddClientUseCase implements UseCase<String, AddClientParams> {
   AddClientUseCase(this.repository);
   @override
   Future<Either<Failure, String>> call(AddClientParams params) async {
-    return repository.addClient(name: params.name);
+    return repository.addClient(
+      name: params.name,
+      contactIds: params.contactIds,
+    );
   }
 }
 
 class AddClientParams {
   final String name;
+  final List<String> contactIds;
 
-  AddClientParams({required this.name});
+  AddClientParams({
+    required this.name,
+    required this.contactIds,
+  });
 }
