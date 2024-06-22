@@ -1,11 +1,13 @@
 class ClientEntity {
   final String name;
   final String clientCode;
-  final int numberOfLinkedContacts;
+  int numberOfLinkedContacts;
+  final String id;
 
   ClientEntity({
     required this.name,
     required this.clientCode,
     required this.numberOfLinkedContacts,
+    required this.id,
   });
 }
