@@ -209,26 +209,29 @@ class _ClientFormState extends State<ClientForm> {
                                     children: allContacts
                                         .map((contact) => Padding(
                                               padding: const EdgeInsets.all(3),
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.all(5),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.transparent,
+                                              child: ChoiceChip(
+                                                label: Text(
+                                                    '${contact.firstName} ${contact.lastName}'),
+                                                selected:
+                                                    false, // You can manage the selected state as needed
+                                                onSelected: (bool selected) {
+                                                  // Handle chip selection
+                                                },
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
-                                                  //border color
-                                                  border: Border.all(
-                                                    color: color,
+                                                  side: BorderSide(
+                                                    color:
+                                                        color, // Assuming 'color' is defined in your scope
                                                     width: 1,
                                                   ),
                                                 ),
-                                                child: TextWidget(
-                                                  text:
-                                                      '${contact.firstName} ${contact.lastName}',
-                                                  color: color,
-                                                  textSize:
-                                                      AppConstants.mainFont5,
-                                                  hoverColor: color,
+                                                labelStyle: TextStyle(
+                                                  color: color, // Text color
+                                                  fontSize: AppConstants
+                                                      .mainFont5, // Assuming 'AppConstants.mainFont5' is defined in your scope
                                                 ),
                                               ),
                                             ))
