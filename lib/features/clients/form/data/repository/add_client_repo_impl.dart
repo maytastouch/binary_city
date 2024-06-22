@@ -16,11 +16,13 @@ class AddClientRepositoryImpl implements AddClientRepository {
   Future<Either<Failure, String>> addClient({
     required String name,
     required List<String> contactIds,
+    required List<String> contacts,
   }) async {
     try {
       final res = await addClientRemoteDataSource.addClient(
         name: name,
         contactIds: contactIds,
+        contacts: contacts,
       );
       return Right(res);
     } on ServerException catch (e) {

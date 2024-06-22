@@ -9,6 +9,7 @@ abstract interface class AddClientRemoteDataSource {
   Future<String> addClient({
     required String name,
     required List<String> contactIds,
+    required List<String> contacts,
   });
 
   // Get all contacts
@@ -21,8 +22,11 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
   AddClientRemoteDatasourceImpl(this.supabaseClient);
 
   @override
-  Future<String> addClient(
-      {required String name, required List<String> contactIds}) async {
+  Future<String> addClient({
+    required String name,
+    required List<String> contactIds,
+    required List<String> contacts,
+  }) async {
     try {
       // Extract the first three characters and convert to uppercase
       String clientCodeAlpha = name.length >= 3
@@ -74,26 +78,17 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
         }
       } while (!isUnique);
 
-      final insertResponse = await supabaseClient
+      await supabaseClient
           .from(AppConstants.clientStable)
-          .insert({'name': name, 'client_code': clientCode})
+          .insert({
+            'name': name,
+            'client_code': clientCode,
+            'linked_contacts': contacts,
+          })
           .select()
           .single();
 
-      final clientId = insertResponse['client_id'];
-
-      // Link contacts to the client
-      if (contactIds.isNotEmpty) {
-        final List<Map<String, dynamic>> clientContactLinks = contactIds
-            .map(
-                (contactId) => {'client_id': clientId, 'contact_id': contactId})
-            .toList();
-
-        await supabaseClient
-            .from(AppConstants.linkTable)
-            .insert(clientContactLinks);
-      }
-      return clientId;
+      return clientCode;
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
     } catch (e) {

@@ -1,7 +1,7 @@
 class ClientEntity {
   final String name;
   final String clientCode;
-  int numberOfLinkedContacts;
+  final List<String> numberOfLinkedContacts;
   final String id;
 
   ClientEntity({

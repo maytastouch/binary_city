@@ -9,35 +9,25 @@ class ClientModel extends ClientEntity {
   });
 
   factory ClientModel.fromJson(Map<String, dynamic> json) {
+    var linkedContactsDynamic = json['linked_contacts']
+        as List<dynamic>; // Temporarily cast as List<dynamic>
+    var linkedContactsString = linkedContactsDynamic
+        .map((e) => e.toString())
+        .toList(); // Convert each element to String
+
     return ClientModel(
       name: json['name'] as String,
       clientCode: json['client_code'] as String,
-      numberOfLinkedContacts: json['number_of_linked_contacts'] ?? 0,
+      numberOfLinkedContacts: linkedContactsString, // Use the converted list
       id: json['client_id'] as String,
     );
   }
-
   Map<String, dynamic> toJson() {
     return {
       'name': name,
       'client_code': clientCode,
-      'number_of_linked_contacts': numberOfLinkedContacts,
+      'linked_contacts': numberOfLinkedContacts,
       'client_id': id,
     };
-  }
-
-  ClientModel copyWith({
-    String? name,
-    String? clientCode,
-    int? numberOfLinkedContacts,
-    String? id,
-  }) {
-    return ClientModel(
-      name: name ?? this.name,
-      clientCode: clientCode ?? this.clientCode,
-      numberOfLinkedContacts:
-          numberOfLinkedContacts ?? this.numberOfLinkedContacts,
-      id: id ?? this.id,
-    );
   }
 }

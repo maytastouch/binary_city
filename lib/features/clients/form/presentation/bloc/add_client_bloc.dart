@@ -33,6 +33,7 @@ class AddClientBloc extends Bloc<AddClientEvent, AddClientState> {
       AddClientParams(
         name: event.name,
         contactIds: event.contactIds,
+        contacts: event.contacts,
       ),
     );
     result.fold(

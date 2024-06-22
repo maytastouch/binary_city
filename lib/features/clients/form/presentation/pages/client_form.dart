@@ -108,6 +108,12 @@ class _ClientFormState extends State<ClientForm> {
                           context.read<AddClientBloc>().add(AddClientsEvent(
                                 name: nameController.text,
                                 contactIds: contactID,
+                                contacts: allContacts
+                                    .where((contact) =>
+                                        contactID.contains(contact.id))
+                                    .map((contact) =>
+                                        '${contact.firstName} ${contact.lastName}')
+                                    .toList(),
                               ));
                         }
                       },

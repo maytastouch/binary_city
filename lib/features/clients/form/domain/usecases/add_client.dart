@@ -15,6 +15,7 @@ class AddClientUseCase implements UseCase<String, AddClientParams> {
     return repository.addClient(
       name: params.name,
       contactIds: params.contactIds,
+      contacts: params.contacts,
     );
   }
 }
@@ -22,9 +23,11 @@ class AddClientUseCase implements UseCase<String, AddClientParams> {
 class AddClientParams {
   final String name;
   final List<String> contactIds;
+  final List<String> contacts;
 
   AddClientParams({
     required this.name,
     required this.contactIds,
+    required this.contacts,
   });
 }
