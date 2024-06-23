@@ -1,3 +1,4 @@
+import 'package:binary_city/core/constants/constants.dart';
 import 'package:binary_city/features/clients/form/presentation/bloc/add_client_bloc.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -103,54 +104,11 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
               ),
             );
           }
-          return PaginatedDataTable2(
-            sortAscending: true,
-            showCheckboxColumn: true,
-            renderEmptyRowsInTheEnd: false,
-            wrapInCard: false,
-            headingRowHeight: 50,
-            headingRowDecoration: const BoxDecoration(
-              color: AppColors.primaryColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-            ),
-            columnSpacing: 12,
-            horizontalMargin: 12,
-            rowsPerPage: 3,
-            columns: const [
-              DataColumn2(
-                label: Text(
-                  'Full Name',
-                  style: TextStyle(color: AppColors.whiteColor),
-                ),
-                size: ColumnSize.L,
-                fixedWidth: 190,
-              ),
-              DataColumn2(
-                label: Text(
-                  'Email Address',
-                  style: TextStyle(color: AppColors.whiteColor),
-                ),
-                size: ColumnSize.S,
-              ),
-              DataColumn(
-                label: Text(
-                  '',
-                  style: TextStyle(color: AppColors.whiteColor),
-                ),
-              ),
-            ],
-            source: ContactsDataSource(
-              contacts: contacts,
-              isChecked: widget.isChecked,
-              onChanged: widget.onChanged,
+          return TextWidget(
+              text: 'No contacts found.',
               color: color,
-              context: context,
-              onPressed: widget.onPressed,
-            ),
-          );
+              textSize: AppConstants.mainFont5,
+              hoverColor: color);
         },
       ),
     );
