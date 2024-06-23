@@ -202,7 +202,7 @@ class ClientDataSource extends DataTableSource {
       cells: [
         DataCell(Text(client.name)),
         DataCell(Text(client.clientCode)),
-        DataCell(Text(client.numberOfLinkedContacts.length.toString())),
+        const DataCell(Text('0')),
       ],
     );
   }

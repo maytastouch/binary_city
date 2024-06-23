@@ -59,7 +59,7 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
         builder: (context, state) {
           if (state is AddClientSuccess) {
             contacts = AddClientBloc.allContacts;
-            selectedContacts = state.client.numberOfLinkedContacts;
+            //selectedContacts = state.client.numberOfLinkedContacts;
 
             // filter contacts to only include selected contacts
             contacts = contacts

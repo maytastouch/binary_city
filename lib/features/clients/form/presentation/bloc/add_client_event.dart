@@ -11,7 +11,7 @@ final class AddClientsEvent extends AddClientEvent {
   AddClientsEvent({
     required this.name,
     required this.contactIds,
-    required this.contacts,s
+    required this.contacts,
   });
 }
 

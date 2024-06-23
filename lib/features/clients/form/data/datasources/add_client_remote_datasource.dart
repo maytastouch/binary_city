@@ -84,7 +84,6 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
           .upsert({
             'name': name,
             'client_code': clientCode,
-            'linked_contacts': contacts,
           }, onConflict: 'name')
           .select()
           .single();

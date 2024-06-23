@@ -1,6 +1,8 @@
 import 'package:binary_city/core/common/entities/contact_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/utils/utils.dart';
+
 class ContactChoiceChip extends StatefulWidget {
   final ContactEntity contact;
   final List<String> selectedContactIDs;
@@ -21,12 +23,19 @@ class ContactChoiceChip extends StatefulWidget {
 class _ContactChoiceChipState extends State<ContactChoiceChip> {
   @override
   Widget build(BuildContext context) {
+    Utils utils = Utils(context);
+    Color color = utils.color;
     bool isSelected = widget.selectedContactIDs.contains(widget.contact.id);
     return Padding(
       padding: const EdgeInsets.all(3),
       child: ChoiceChip(
         avatar: isSelected ? const Icon(Icons.check, size: 20.0) : null,
-        label: Text('${widget.contact.firstName} ${widget.contact.lastName}'),
+        label: Text(
+          '${widget.contact.firstName} ${widget.contact.lastName}',
+          style: TextStyle(
+            color: color,
+          ),
+        ),
         selected: isSelected,
         onSelected: (bool selected) {
           widget.onSelectionChanged(widget.contact.id, selected);
