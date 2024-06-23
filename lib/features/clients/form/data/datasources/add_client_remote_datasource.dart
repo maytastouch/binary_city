@@ -81,11 +81,11 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
 
       final client = await supabaseClient
           .from(AppConstants.clientStable)
-          .insert({
+          .upsert({
             'name': name,
             'client_code': clientCode,
             'linked_contacts': contacts,
-          })
+          }, onConflict: 'name')
           .select()
           .single();
       ClientModel singleClient = ClientModel.fromJson(client);

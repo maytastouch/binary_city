@@ -12,6 +12,7 @@ import '../../../../../core/common/widgets/text_widget.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/constants.dart';
 import '../bloc/add_client_bloc.dart';
+import '../widgets/contact_choice_chip.dart';
 import '../widgets/save_client_button.dart';
 
 class ClientForm extends StatefulWidget {
@@ -214,56 +215,22 @@ class _ClientFormState extends State<ClientForm> {
                                   }
                                   return Row(
                                     children: allContacts
-                                        .map((contact) => Padding(
-                                              padding: const EdgeInsets.all(3),
-                                              child: ChoiceChip(
-                                                avatar: contactID
-                                                        .contains(contact.id)
-                                                    ? const Icon(Icons.check,
-                                                        size: 20.0)
-                                                    : null, // Show a check icon when selected
-                                                label: Text(
-                                                    '${contact.firstName} ${contact.lastName}'),
-                                                selected: contactID
-                                                    .contains(contact.id),
-                                                onSelected: (bool selected) {
-                                                  setState(() {
-                                                    // Use setState or equivalent in your state management
-                                                    if (selected) {
-                                                      if (!contactID.contains(
-                                                          contact.id)) {
-                                                        contactID
-                                                            .add(contact.id);
-                                                      }
-                                                    } else {
-                                                      contactID
-                                                          .remove(contact.id);
+                                        .map((contact) => ContactChoiceChip(
+                                              contact: contact,
+                                              selectedContactIDs: contactID,
+                                              onSelectionChanged:
+                                                  (String id, bool selected) {
+                                                setState(() {
+                                                  if (selected) {
+                                                    if (!contactID
+                                                        .contains(id)) {
+                                                      contactID.add(id);
                                                     }
-                                                  });
-                                                },
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                selectedColor: Colors.blue
-                                                    .withOpacity(
-                                                        0.5), // Optional: Change background color when selected
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  side: BorderSide(
-                                                    color:
-                                                        color, // Assuming 'color' is defined in your scope
-                                                    width: 1,
-                                                  ),
-                                                ),
-                                                labelStyle: TextStyle(
-                                                  color: contactID
-                                                          .contains(contact.id)
-                                                      ? Colors.white
-                                                      : color, // Corrected line
-                                                  fontSize: AppConstants
-                                                      .mainFont5, // Assuming 'AppConstants.mainFont5' is defined in your scope
-                                                ),
-                                              ),
+                                                  } else {
+                                                    contactID.remove(id);
+                                                  }
+                                                });
+                                              },
                                             ))
                                         .toList(),
                                   );
