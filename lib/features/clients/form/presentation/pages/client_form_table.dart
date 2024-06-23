@@ -1,3 +1,4 @@
+import 'package:binary_city/core/common/widgets/loader.dart';
 import 'package:binary_city/core/constants/constants.dart';
 import 'package:binary_city/features/clients/form/presentation/bloc/add_client_bloc.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -103,6 +104,8 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
                 onPressed: widget.onPressed,
               ),
             );
+          } else if (state is AddClientLoading) {
+            return const Loader();
           }
           return TextWidget(
               text: 'No contacts found.',
