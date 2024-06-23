@@ -44,6 +44,8 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
           if (state is GetAllContactsLoaded) {
             contacts = state.contacts;
           }
+        },
+        builder: (context, state) {
           if (state is AddClientSuccess) {
             contacts = AddClientBloc.allContacts;
             selectedContacts = state.client.numberOfLinkedContacts;
@@ -52,10 +54,6 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
             contacts = contacts
                 .where((contact) => selectedContacts.contains(contact.id))
                 .toList();
-          }
-        },
-        builder: (context, state) {
-          if (state is AddClientSuccess) {
             return PaginatedDataTable2(
               sortAscending: true,
               showCheckboxColumn: true,
