@@ -5,6 +5,7 @@ import 'package:binary_city/core/error/failures.dart';
 // ignore: implementation_imports
 import 'package:fpdart/src/either.dart';
 
+import '../../../../../core/common/models/client_model.dart';
 import '../../domain/repository/add_client_repo.dart';
 import '../datasources/add_client_remote_datasource.dart';
 
@@ -13,7 +14,7 @@ class AddClientRepositoryImpl implements AddClientRepository {
 
   AddClientRepositoryImpl(this.addClientRemoteDataSource);
   @override
-  Future<Either<Failure, String>> addClient({
+  Future<Either<Failure, ClientModel>> addClient({
     required String name,
     required List<String> contactIds,
     required List<String> contacts,
