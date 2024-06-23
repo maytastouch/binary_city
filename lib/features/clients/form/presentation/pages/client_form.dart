@@ -111,8 +111,7 @@ class _ClientFormState extends State<ClientForm> {
                                 contacts: allContacts
                                     .where((contact) =>
                                         contactID.contains(contact.id))
-                                    .map((contact) =>
-                                        '${contact.firstName} ${contact.lastName}')
+                                    .map((contact) => contact.id.toString())
                                     .toList(),
                               ));
                         }

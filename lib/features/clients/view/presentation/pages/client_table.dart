@@ -193,9 +193,7 @@ class ClientDataSource extends DataTableSource {
       cells: [
         DataCell(Text(client.name)),
         DataCell(Text(client.clientCode)),
-        DataCell(Tooltip(
-            message: client.numberOfLinkedContacts.join(', '),
-            child: Text(client.numberOfLinkedContacts.length.toString()))),
+        DataCell(Text(client.numberOfLinkedContacts.length.toString())),
       ],
     );
   }
