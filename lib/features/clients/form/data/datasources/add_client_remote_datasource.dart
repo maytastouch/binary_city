@@ -89,6 +89,19 @@ class AddClientRemoteDatasourceImpl implements AddClientRemoteDataSource {
           .single();
       ClientModel singleClient = ClientModel.fromJson(client);
 
+      // Delete existing rows with the same client_id
+      await supabaseClient
+          .from(AppConstants.linkTable)
+          .delete()
+          .eq('client_id', singleClient.id);
+      // After successfully adding the client, add the contact IDs to the corresponding client ID
+      for (String contactId in contactIds) {
+        await supabaseClient.from(AppConstants.linkTable).insert({
+          'client_id': singleClient.id, // Assuming ClientModel has an id field
+          'contact_id': contactId,
+        });
+      }
+
       return singleClient;
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
