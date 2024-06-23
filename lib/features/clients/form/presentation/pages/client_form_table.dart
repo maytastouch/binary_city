@@ -87,7 +87,7 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
               border: const TableBorder(
                 horizontalInside: BorderSide(color: AppColors.primaryColor),
               ),
-              rowsPerPage: 5,
+              rowsPerPage: 2,
               columns: [
                 DataColumn2(
                   label: const Text(
