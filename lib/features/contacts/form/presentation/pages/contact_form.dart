@@ -193,6 +193,7 @@ class _ContactFormState extends State<ContactForm> {
                             controller: emailController,
                             label: 'Email',
                             enableValidation: true,
+                            isEmail: true,
                           ),
                         ],
                       )

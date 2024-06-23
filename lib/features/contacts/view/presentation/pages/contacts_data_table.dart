@@ -1,4 +1,5 @@
 import 'package:binary_city/core/common/widgets/text_widget.dart';
+import 'package:binary_city/core/constants/constants.dart';
 import 'package:binary_city/core/utils/show_snackbar.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,13 @@ class _ContactDataTableState extends State<ContactDataTable> {
         builder: (context, state) {
           if (state is GetAllContactsLoaded) {
             contacts = state.contactList;
+            if (contacts.isEmpty) {
+              return TextWidget(
+                  text: 'No contact(s) found.',
+                  color: color,
+                  textSize: AppConstants.mainFont5,
+                  hoverColor: color);
+            }
             return PaginatedDataTable2(
               sortAscending: true,
               showCheckboxColumn: true,

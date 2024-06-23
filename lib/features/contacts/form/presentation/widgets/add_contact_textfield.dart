@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart'; // Add this import for email validation
 
 import '../../../../../core/common/widgets/text_widget.dart';
 import '../../../../../core/constants/colors.dart';
@@ -15,6 +16,8 @@ class AddContactTextField extends StatelessWidget {
   final IconButton? trailingIcon; // Add this line
   final bool readOnly;
   final Function? onTap;
+  final bool
+      isEmail; // Add this line to indicate if the text field is for email
 
   const AddContactTextField({
     super.key,
@@ -27,6 +30,7 @@ class AddContactTextField extends StatelessWidget {
     this.trailingIcon,
     this.readOnly = false,
     this.onTap,
+    this.isEmail = false, // Default value is false
   });
 
   @override
@@ -83,6 +87,9 @@ class AddContactTextField extends StatelessWidget {
                 ? (value) {
                     if (value!.isEmpty) {
                       return "$hint is missing!";
+                    } else if (isEmail && !EmailValidator.validate(value)) {
+                      // Check if it's an email field and validate
+                      return "Please enter a valid email address";
                     }
                     return null;
                   }
