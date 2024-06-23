@@ -46,6 +46,12 @@ class _ClientFormState extends State<ClientForm> {
     super.initState();
   }
 
+  void _unlinkContact(String id) {
+    setState(() {
+      contactID.remove(id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
@@ -124,12 +130,9 @@ class _ClientFormState extends State<ClientForm> {
               ],
             ),
             const SizedBox(height: 20),
-            //table
             Form(
               key: formKey,
               child: TabContainer(
-                //controller: _tabController,
-                //tabEdge: TabEdge.right,
                 tabsStart: 0,
                 tabsEnd: 0.9,
                 tabMaxLength: 100,
@@ -149,8 +152,6 @@ class _ClientFormState extends State<ClientForm> {
                   AppColors.primaryColor,
                 ],
                 tabs: [
-                  //Text('General'),
-                  //Text('Contacts'),
                   TextWidget(
                       text: 'General',
                       color: color,
@@ -243,6 +244,8 @@ class _ClientFormState extends State<ClientForm> {
                               onChanged: (bool? value) {},
                               color: color,
                               onPressed: () {},
+                              onUnlink: _unlinkContact,
+                              contactID: contactID, // Pass the callback
                             ),
                           ),
                         ],

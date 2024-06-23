@@ -16,6 +16,8 @@ class ClientFormDataTable extends StatefulWidget {
   final Function(bool?) onChanged;
   final Color color;
   final VoidCallback onPressed;
+  final List<String> contactID; // Add this
+  final Function(String) onUnlink; // Add this callback
 
   const ClientFormDataTable({
     super.key,
@@ -23,6 +25,8 @@ class ClientFormDataTable extends StatefulWidget {
     required this.onChanged,
     required this.color,
     required this.onPressed,
+    required this.contactID, // Add this
+    required this.onUnlink, // Add this
   });
 
   @override
@@ -32,6 +36,13 @@ class ClientFormDataTable extends StatefulWidget {
 class _ClientFormDataTableState extends State<ClientFormDataTable> {
   List<ContactEntity> contacts = [];
   List<String> selectedContacts = [];
+
+  @override
+  void initState() {
+    selectedContacts = widget.contactID; // Initialize with selected contact IDs
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
@@ -69,31 +80,41 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
               headingRowHeight: 50,
               headingRowDecoration: const BoxDecoration(
                 color: AppColors.primaryColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
               ),
-              columnSpacing: 12,
-              horizontalMargin: 12,
-              rowsPerPage: 2,
-              columns: const [
+              columnSpacing: 30,
+              horizontalMargin: 10,
+              dataRowHeight: 50,
+              border: const TableBorder(
+                horizontalInside: BorderSide(color: AppColors.primaryColor),
+              ),
+              rowsPerPage: 5,
+              columns: [
                 DataColumn2(
-                  label: Text(
-                    'Full Name',
+                  label: const Text(
+                    'Name',
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
-                  size: ColumnSize.L,
+                  onSort: (columnIndex, ascending) {
+                    setState(() {
+                      if (ascending) {
+                        contacts
+                            .sort((a, b) => a.firstName.compareTo(b.firstName));
+                      } else {
+                        contacts
+                            .sort((a, b) => b.firstName.compareTo(a.firstName));
+                      }
+                    });
+                  },
                   fixedWidth: 190,
                 ),
-                DataColumn2(
+                const DataColumn2(
                   label: Text(
                     'Email Address',
                     style: TextStyle(color: AppColors.whiteColor),
                   ),
                   size: ColumnSize.S,
                 ),
-                DataColumn(
+                const DataColumn(
                   label: Text(
                     '',
                     style: TextStyle(color: AppColors.whiteColor),
@@ -107,6 +128,13 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
                 color: color,
                 context: context,
                 onPressed: widget.onPressed,
+                onUnlink: (id) {
+                  widget.onUnlink(id); // Unlink the contact from the state
+                  setState(() {
+                    contacts.removeWhere((contact) => contact.id == id);
+                    selectedContacts.remove(id);
+                  });
+                },
               ),
             );
           } else if (state is AddClientLoading) {
@@ -130,6 +158,7 @@ class ContactsDataSource extends DataTableSource {
   final Color color;
   final BuildContext context;
   final VoidCallback onPressed;
+  final Function(String) onUnlink; // Add this callback
 
   ContactsDataSource({
     required this.contacts,
@@ -138,6 +167,7 @@ class ContactsDataSource extends DataTableSource {
     required this.onChanged,
     required this.color,
     required this.context,
+    required this.onUnlink, // Add this
   });
 
   @override
@@ -167,12 +197,15 @@ class ContactsDataSource extends DataTableSource {
           maxLines: 1,
         )),
         DataCell(
-          TextWidget(
-            text: 'Unlink',
-            color: AppColors.primaryColor,
-            textSize: 14,
-            hoverColor: AppColors.primaryColor,
-            maxLines: 1,
+          GestureDetector(
+            onTap: () => onUnlink(contact.id), // Use the callback here
+            child: TextWidget(
+              text: 'Unlink',
+              color: AppColors.primaryColor,
+              textSize: 14,
+              hoverColor: AppColors.primaryColor,
+              maxLines: 1,
+            ),
           ),
         ),
       ],
