@@ -54,6 +54,13 @@ class _ClientFormDataTableState extends State<ClientFormDataTable> {
             contacts = contacts
                 .where((contact) => selectedContacts.contains(contact.id))
                 .toList();
+            if (contacts.isEmpty) {
+              return TextWidget(
+                  text: 'No contacts found.',
+                  color: color,
+                  textSize: AppConstants.mainFont5,
+                  hoverColor: color);
+            }
             return PaginatedDataTable2(
               sortAscending: true,
               showCheckboxColumn: true,
