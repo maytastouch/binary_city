@@ -1,3 +1,4 @@
+import 'package:binary_city/core/common/entities/client_entity.dart';
 import 'package:binary_city/features/clients/form/domain/usecases/add_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +40,10 @@ class AddClientBloc extends Bloc<AddClientEvent, AddClientState> {
     result.fold(
       (failure) => emit(AddClientFailure(message: failure.message)),
       (res) => emit(AddClientSuccess(
-          message: 'Client added successfully', code: res.clientCode)),
+        message: 'Client added successfully',
+        code: res.clientCode,
+        client: res,
+      )),
       //numberOfLinkedContacts: res['numberOfLinkedContacts'])),
     );
   }
